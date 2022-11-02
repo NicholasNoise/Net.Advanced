@@ -1,0 +1,14 @@
+﻿using Autofac;
+using Net.Advanced.Core.Interfaces;
+using Net.Advanced.Core.Services;
+
+namespace Net.Advanced.Core;
+
+public class DefaultCoreModule : Module
+{
+  protected override void Load(ContainerBuilder builder)
+  {
+    builder.RegisterType<ToDoItemSearchService>()
+        .As<IToDoItemSearchService>().InstancePerLifetimeScope();
+  }
+}
