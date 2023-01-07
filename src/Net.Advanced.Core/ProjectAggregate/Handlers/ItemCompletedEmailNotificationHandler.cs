@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using Net.Advanced.Core.Interfaces;
 using Net.Advanced.Core.ProjectAggregate.Events;
 using MediatR;

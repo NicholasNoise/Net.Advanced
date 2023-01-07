@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.SharedKernel;
 using Net.Advanced.SharedKernel.Interfaces;
@@ -19,6 +20,7 @@ public class AppDbContext : DbContext
 
   public DbSet<ToDoItem> ToDoItems => Set<ToDoItem>();
   public DbSet<Project> Projects => Set<Project>();
+  public DbSet<Contributor> Contributors => Set<Contributor>(); 
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
