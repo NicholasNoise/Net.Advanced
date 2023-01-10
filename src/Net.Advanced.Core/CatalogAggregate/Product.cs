@@ -5,10 +5,11 @@ using Net.Advanced.SharedKernel.Interfaces;
 namespace Net.Advanced.Core.CatalogAggregate;
 public class Product : EntityBase, IAggregateRoot
 {
-  public Product(string name, decimal price)
+  public Product(string name, decimal price, uint amount)
   {
     Name = Guard.Against.NullOrEmpty(name, nameof(name));
     Price = price;
+    Amount = amount;
   }
 
   public string Name { get; private set; }

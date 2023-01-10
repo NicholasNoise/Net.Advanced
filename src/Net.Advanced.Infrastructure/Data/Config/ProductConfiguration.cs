@@ -13,6 +13,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
     builder.HasOne(p => p.Category)
       .WithMany()
-      .OnDelete(DeleteBehavior.Cascade);
+      .OnDelete(DeleteBehavior.Cascade)
+      .IsRequired();
   }
 }

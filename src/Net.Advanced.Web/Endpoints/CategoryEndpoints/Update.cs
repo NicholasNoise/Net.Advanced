@@ -45,7 +45,7 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
       parentCategory = await _repository.GetByIdAsync(request.ParentId.Value, cancellationToken);
       if (parentCategory is null)
       {
-        ThrowError("Parent has not found");
+        ThrowError("Parent was not found");
       }
     }
 
