@@ -1,5 +1,4 @@
-﻿using Net.Advanced.Core.ProjectAggregate;
-using Net.Advanced.Infrastructure.Data;
+﻿using Net.Advanced.Infrastructure.Data;
 using Net.Advanced.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,27 +16,34 @@ public abstract class BaseEfRepoTestFixture
     var mockEventDispatcher = new Mock<IDomainEventDispatcher>();
 
     _dbContext = new AppDbContext(options, mockEventDispatcher.Object);
+    _dbContext.Database.EnsureDeleted();
+    _dbContext.Database.EnsureCreated();
   }
 
-  protected static DbContextOptions<AppDbContext> CreateNewContextOptions()
+  protected abstract string DbName { get; }
+
+  protected DbContextOptions<AppDbContext> CreateNewContextOptions()
   {
     // Create a fresh service provider, and therefore a fresh
-    // InMemory database instance.
+    // Postgres database instance.
+    var config = AppSettings.InitConfiguration();
     var serviceProvider = new ServiceCollection()
-        .AddEntityFrameworkInMemoryDatabase()
+        .AddEntityFrameworkNpgsql()
+        .AddSingleton(config)
         .BuildServiceProvider();
 
     // Create a new options instance telling the context to use an
-    // InMemory database and the new service provider.
+    // Postgres database and the new service provider.
+    var connectionString = AppSettings.GetUniquePostgreSqlConnectionString(config, DbName);
     var builder = new DbContextOptionsBuilder<AppDbContext>();
-    builder.UseInMemoryDatabase("cleanarchitecture")
+    builder.UseNpgsql(connectionString)
            .UseInternalServiceProvider(serviceProvider);
 
     return builder.Options;
   }
 
-  protected EfRepository<Project> GetRepository()
+  protected EfRepository<T> GetRepository<T>() where T : class, IAggregateRoot
   {
-    return new EfRepository<Project>(_dbContext);
+    return new EfRepository<T>(_dbContext);
   }
 }
