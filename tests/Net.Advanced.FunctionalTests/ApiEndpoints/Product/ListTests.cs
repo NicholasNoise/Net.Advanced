@@ -20,7 +20,7 @@ public class ListTests : BaseWebFixture
     var result = await Client.GetAndDeserializeAsync<ProductListResponse>(List.Route);
 
     // Assert.
-    Assert.Single(result.Products);
+    Assert.Equal(2, result.Products.Count);
     Assert.Contains(result.Products, i => i.Name == SeedData.Product1.Name);
   }
 }

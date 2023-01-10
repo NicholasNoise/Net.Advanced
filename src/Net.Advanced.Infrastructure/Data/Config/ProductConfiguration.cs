@@ -11,6 +11,9 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
       .HasMaxLength(100)
       .IsRequired();
 
+    builder.Navigation(p => p.Category)
+      .AutoInclude();
+
     builder.HasOne(p => p.Category)
       .WithMany()
       .OnDelete(DeleteBehavior.Cascade)

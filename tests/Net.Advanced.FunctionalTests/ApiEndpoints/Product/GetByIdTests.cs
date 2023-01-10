@@ -17,7 +17,7 @@ public class GetByIdTests : BaseWebFixture
   public async Task ReturnsProduct()
   {
     // Arrange.
-    const int productId = 1;
+    int productId = SeedData.Product1.Id;
     string route = GetProductByIdRequest.BuildRoute(productId);
 
     // Act.
