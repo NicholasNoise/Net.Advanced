@@ -38,9 +38,6 @@ public class EfRepositoryAdd : BaseEfRepoTestFixture
     // Act.
     await repository.AddAsync(category);
 
-    // detach the item so we get a different instance
-    _dbContext.Entry(category).State = EntityState.Detached;
-
     var newCategory = (await repository.ListAsync())
       .FirstOrDefault();
 
@@ -48,5 +45,28 @@ public class EfRepositoryAdd : BaseEfRepoTestFixture
     Assert.NotNull(newCategory);
     Assert.Equal(testCategoryName, newCategory.Name);
     Assert.True(newCategory.Id > 0);
+  }
+
+  [Fact]
+  public async Task AddsProduct()
+  {
+    // Arrange.
+    const string testCategoryName = "testCategory";
+    const string testProductName = "testProduct";
+    var repository = GetRepository<Product>();
+    var category = new Category(testCategoryName);
+    var product = new Product(testProductName, 1m) { Category = category };
+
+    // Act.
+    await repository.AddAsync(product);
+
+    var newProduct = (await repository.ListAsync())
+      .FirstOrDefault();
+
+    // Assert.
+    Assert.NotNull(newProduct);
+    Assert.Equal(testProductName, newProduct.Name);
+    Assert.Equal(category, newProduct.Category);
+    Assert.True(newProduct.Id > 0);
   }
 }

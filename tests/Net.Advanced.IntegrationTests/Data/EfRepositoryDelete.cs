@@ -41,4 +41,21 @@ public class EfRepositoryDelete : BaseEfRepoTestFixture
     Assert.DoesNotContain(await repository.ListAsync(),
       c => c.Name == initialName);
   }
+
+  [Fact]
+  public async Task DeletesProductAfterAddingIt()
+  {
+    // Arrange.
+    var repository = GetRepository<Product>();
+    var initialName = Guid.NewGuid().ToString();
+    var product = new Product(initialName, 1m);
+    await repository.AddAsync(product);
+
+    // Act.
+    await repository.DeleteAsync(product);
+
+    // Assert.
+    Assert.DoesNotContain(await repository.ListAsync(),
+      c => c.Name == initialName);
+  }
 }

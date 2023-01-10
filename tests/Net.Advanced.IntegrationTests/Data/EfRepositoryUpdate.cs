@@ -116,4 +116,37 @@ public class EfRepositoryUpdate : BaseEfRepoTestFixture
     Assert.Equal(newCategory.Id, updatedItem.Id);
     Assert.Equal(newCategory.Parent, updatedItem.Parent);
   }
+
+  [Fact]
+  public async Task UpdatesProductAfterAddingIt()
+  {
+    // Arrange
+    var repository = GetRepository<Product>();
+    var initialName = Guid.NewGuid().ToString();
+    var product = new Product(initialName, 1m);
+
+    await repository.AddAsync(product);
+
+    // detach the item so we get a different instance
+    _dbContext.Entry(product).State = EntityState.Detached;
+
+    // fetch the item and update its title
+    var newProduct = (await repository.ListAsync())
+      .FirstOrDefault(c => c.Name == initialName);
+    Assert.NotNull(newProduct);
+    Assert.NotSame(product, newProduct);
+    newProduct.Amount = 1000;
+
+    // Update the item
+    await repository.UpdateAsync(newProduct);
+
+    // Fetch the updated item
+    var updatedItem = (await repository.ListAsync())
+      .FirstOrDefault(c => c.Name == initialName);
+
+    // Assert.
+    Assert.NotNull(updatedItem);
+    Assert.Equal(newProduct.Id, updatedItem.Id);
+    Assert.NotEqual(product.Amount, updatedItem.Amount);
+  }
 }

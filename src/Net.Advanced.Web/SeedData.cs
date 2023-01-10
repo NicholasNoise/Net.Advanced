@@ -12,6 +12,7 @@ public static class SeedData
   public static readonly Category Category2 = new Category("CPU");
   public static readonly Contributor Contributor1 = new ("Ardalis");
   public static readonly Contributor Contributor2 = new ("Snowfrog");
+  public static readonly Product Product1 = new Product("Test product", 1m) { Category = Category2 };
   public static readonly Project TestProject1 = new Project("Test Project", PriorityStatus.Backlog);
   public static readonly ToDoItem ToDoItem1 = new ToDoItem
   {
@@ -64,6 +65,11 @@ public static class SeedData
     {
       dbContext.Remove(item);
     }
+
+    foreach (var item in dbContext.Products)
+    {
+      dbContext.Remove(item);
+    }
     dbContext.SaveChanges();
 
     dbContext.Categories.Add(Category1);
@@ -80,6 +86,12 @@ public static class SeedData
     ToDoItem1.AddContributor(Contributor1.Id);
     ToDoItem2.AddContributor(Contributor2.Id);
     ToDoItem3.AddContributor(Contributor1.Id);
+
+    dbContext.SaveChanges();
+
+    dbContext.Products.Add(Product1);
+
+    dbContext.SaveChanges();
 
     TestProject1.AddItem(ToDoItem1);
     TestProject1.AddItem(ToDoItem2);

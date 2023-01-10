@@ -23,6 +23,7 @@ public class AppDbContext : DbContext
   public DbSet<Project> Projects => Set<Project>();
   public DbSet<Contributor> Contributors => Set<Contributor>();
   public DbSet<Category> Categories => Set<Category>();
+  public DbSet<Product> Products => Set<Product>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
