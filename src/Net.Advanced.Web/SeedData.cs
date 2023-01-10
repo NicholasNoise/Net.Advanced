@@ -2,11 +2,14 @@
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Net.Advanced.Core.CatalogAggregate;
 
 namespace Net.Advanced.Web;
 
 public static class SeedData
 {
+  public static readonly Category Category1 = new Category("Hardware");
+  public static readonly Category Category2 = new Category("CPU");
   public static readonly Contributor Contributor1 = new ("Ardalis");
   public static readonly Contributor Contributor2 = new ("Snowfrog");
   public static readonly Project TestProject1 = new Project("Test Project", PriorityStatus.Backlog);
@@ -56,6 +59,17 @@ public static class SeedData
     {
       dbContext.Remove(item);
     }
+
+    foreach (var item in dbContext.Categories)
+    {
+      dbContext.Remove(item);
+    }
+    dbContext.SaveChanges();
+
+    dbContext.Categories.Add(Category1);
+    dbContext.Categories.Add(Category2);
+    Category2.UpdateParent(Category1);
+
     dbContext.SaveChanges();
 
     dbContext.Contributors.Add(Contributor1);

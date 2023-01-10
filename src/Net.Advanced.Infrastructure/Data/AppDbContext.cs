@@ -4,6 +4,7 @@ using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.SharedKernel;
 using Net.Advanced.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Net.Advanced.Core.CatalogAggregate;
 
 namespace Net.Advanced.Infrastructure.Data;
 
@@ -20,7 +21,8 @@ public class AppDbContext : DbContext
 
   public DbSet<ToDoItem> ToDoItems => Set<ToDoItem>();
   public DbSet<Project> Projects => Set<Project>();
-  public DbSet<Contributor> Contributors => Set<Contributor>(); 
+  public DbSet<Contributor> Contributors => Set<Contributor>();
+  public DbSet<Category> Categories => Set<Category>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
