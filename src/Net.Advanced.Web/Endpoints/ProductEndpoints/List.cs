@@ -4,16 +4,18 @@ using Net.Advanced.Core.CatalogAggregate;
 
 namespace Net.Advanced.Web.Endpoints.ProductEndpoints;
 
-public class List : EndpointWithoutRequest<ProductListResponse>
+public class List : Endpoint<ProductListRequest, ProductListResponse>
 {
-  private readonly IRepository<Product> _repository;
+  private const string Route = "/Products";
 
-  public const string Route = "/Products";
+  private readonly IRepository<Product> _repository;
 
   public List(IRepository<Product> repository)
   {
     _repository = repository;
   }
+
+  public static string BuildRoute(int perPage, int page) => $"{Route}?perPage={perPage}&page={page}";
 
   public override void Configure()
   {
@@ -22,10 +24,14 @@ public class List : EndpointWithoutRequest<ProductListResponse>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
-  public override async Task HandleAsync(CancellationToken cancellationToken)
+
+  public override async Task HandleAsync(
+    ProductListRequest request,
+    CancellationToken cancellationToken)
   {
-    var products = await _repository.ListAsync(cancellationToken);
-    var response = new ProductListResponse
+    var count = await _repository.CountAsync(cancellationToken);
+    var products = await _repository.ListAsync(request.PerPage, request.Page, null, cancellationToken);
+    var response = new ProductListResponse(count, request.Page, request.PerPage, BuildRoute)
     {
       Products = products
         .Select(ProductRecord.FromProduct)
