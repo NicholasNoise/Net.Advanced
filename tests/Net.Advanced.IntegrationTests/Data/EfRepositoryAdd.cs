@@ -55,7 +55,7 @@ public class EfRepositoryAdd : BaseEfRepoTestFixture
     const string testProductName = "testProduct";
     var repository = GetRepository<Product>();
     var category = new Category(testCategoryName);
-    var product = new Product(testProductName, 1m) { Category = category };
+    var product = new Product(testProductName, 1m, 1) { Category = category };
 
     // Act.
     await repository.AddAsync(product);

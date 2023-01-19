@@ -46,9 +46,11 @@ public class EfRepositoryDelete : BaseEfRepoTestFixture
   public async Task DeletesProductAfterAddingIt()
   {
     // Arrange.
+    const string testCategoryName = "testCategory";
+    const string initialName = "testProduct";
     var repository = GetRepository<Product>();
-    var initialName = Guid.NewGuid().ToString();
-    var product = new Product(initialName, 1m);
+    var category = new Category(testCategoryName);
+    var product = new Product(initialName, 1m, 1) { Category = category };
     await repository.AddAsync(product);
 
     // Act.
