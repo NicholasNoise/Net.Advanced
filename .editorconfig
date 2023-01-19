@@ -1,3 +1,4 @@
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
 ###############################
 # Core EditorConfig Options   #
 ###############################
@@ -14,17 +15,32 @@ indent_size = 2
 [*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
 indent_size = 2
 
+# JSON files
+[*.json]
+indent_size = 2
+
+# Powershell files
+[*.ps1]
+indent_size = 2
+
+# Shell script files
+[*.sh]
+end_of_line = lf
+indent_size = 2
+
 # Code files
 [*.{cs,csx,vb,vbx}]
-indent_size =2
+indent_size = 2
 insert_final_newline = true
 charset = utf-8-bom
+tab_width = 2
 ###############################
 # .NET Coding Conventions     #
 ###############################
 [*.{cs,vb}]
 # Organize usings
 dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
 # this. preferences
 dotnet_style_qualification_for_field = false:silent
 dotnet_style_qualification_for_property = false:silent
@@ -51,8 +67,14 @@ dotnet_style_prefer_is_null_check_over_reference_equality_method = true:silent
 dotnet_style_prefer_inferred_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_auto_properties = true:silent
-dotnet_style_prefer_conditional_expression_over_assignment = true:silent
-dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:silent
+dotnet_style_prefer_compound_assignment = true:suggestion
+dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_namespace_match_folder = true:suggestion
+# Parameter preferences
+dotnet_code_quality_unused_parameters = non_public:suggestion
 ###############################
 # Naming Conventions          #
 ###############################
@@ -65,7 +87,6 @@ dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_
 dotnet_naming_symbols.constant_fields.applicable_kinds            = field
 dotnet_naming_symbols.constant_fields.applicable_accessibilities  = *
 dotnet_naming_symbols.constant_fields.required_modifiers          = const
-tab_width=2
 dotnet_naming_rule.private_members_with_underscore.symbols  = private_fields
 dotnet_naming_rule.private_members_with_underscore.style    = prefix_underscore
 dotnet_naming_rule.private_members_with_underscore.severity = suggestion
@@ -73,6 +94,10 @@ dotnet_naming_symbols.private_fields.applicable_kinds           = field
 dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_style.prefix_underscore.capitalization = camel_case
 dotnet_naming_style.prefix_underscore.required_prefix = _
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+# New line preferences
+dotnet_style_allow_multiple_blank_lines_experimental = false:silent
+dotnet_style_allow_statement_immediately_after_block_experimental = false:silent
 ###############################
 # C# Coding Conventions       #
 ###############################
@@ -91,19 +116,31 @@ csharp_style_expression_bodied_accessors = true:silent
 # Pattern matching preferences
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
 csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:silent
+csharp_style_prefer_extended_property_pattern = true:suggestion
+csharp_style_prefer_not_pattern = true:suggestion
 # Null-checking preferences
 csharp_style_throw_expression = true:suggestion
 csharp_style_conditional_delegate_call = true:suggestion
+csharp_style_prefer_parameter_null_checking = true:suggestion
 # Modifier preferences
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:suggestion
+csharp_prefer_static_local_function = true:suggestion
 # Expression-level preferences
 csharp_prefer_braces = true:silent
 csharp_style_deconstructed_variable_declaration = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
 csharp_style_pattern_local_over_anonymous_function = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
-# Namespaces
-csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_prefer_null_check_over_type_check = true:suggestion
+csharp_style_prefer_local_over_anonymous_function = true:suggestion
+csharp_style_prefer_index_operator = true:suggestion
+csharp_style_prefer_range_operator = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
+csharp_style_prefer_tuple_swap = true:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable:suggestion
+csharp_style_unused_value_expression_statement_preference = discard_variable:silent
 ###############################
 # C# Formatting Rules         #
 ###############################
@@ -115,28 +152,519 @@ csharp_new_line_before_finally = true
 csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_between_query_expression_clauses = true
+csharp_style_allow_embedded_statements_on_same_line_experimental = false:silent
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = false:silent
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false:silent
 # Indentation preferences
+csharp_indent_block_contents = true
+csharp_indent_braces = false
 csharp_indent_case_contents = true
+csharp_indent_case_contents_when_block = true
 csharp_indent_switch_labels = true
 csharp_indent_labels = flush_left
 # Space preferences
 csharp_space_after_cast = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_comma = true
+csharp_space_after_dot = false
 csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = do_not_ignore
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_open_square_brackets = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
 csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
 csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
-csharp_space_before_colon_in_inheritance_clause = true
-csharp_space_after_colon_in_inheritance_clause = true
-csharp_space_around_binary_operators = before_and_after
-csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
-csharp_space_between_method_call_name_and_opening_parenthesis = false
-csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_square_brackets = false
 # Wrapping preferences
-csharp_preserve_single_line_statements = true
+csharp_preserve_single_line_statements = false
 csharp_preserve_single_line_blocks = true
+csharp_using_directive_placement = outside_namespace:silent
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_namespace_declarations = block_scoped:silent
+csharp_style_prefer_method_group_conversion = true:silent
+csharp_style_expression_bodied_lambdas = true:silent
+csharp_style_expression_bodied_local_functions = false:silent
+csharp_style_prefer_top_level_statements = true:silent
 ###############################
 # VB Coding Conventions       #
 ###############################
 [*.vb]
 # Modifier preferences
 visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async:suggestion
+
+# Dotnet code style settings:
+[*.{cs,vb}]
+# IDE0001: Simplify name
+dotnet_diagnostic.IDE0001.severity = warning
+# IDE0005: Remove unnecessary using directives
+dotnet_diagnostic.IDE0005.severity = warning
+# IDE0007: Use var instead of explicit type
+dotnet_diagnostic.IDE0007.severity = warning
+# IDE0011: Add braces
+dotnet_diagnostic.IDE0011.severity = warning
+# IDE0035: Remove unreachable code
+dotnet_diagnostic.IDE0035.severity = warning
+# IDE0036: Order modifiers
+dotnet_diagnostic.IDE0036.severity = warning
+# IDE0040: Add accessibility modifiers
+dotnet_diagnostic.IDE0040.severity = warning
+# IDE0044: Make field readonly
+dotnet_diagnostic.IDE0044.severity = warning
+# IDE0049: Use language keywords instead of framework type names for type references
+dotnet_diagnostic.IDE0049.severity = warning
+# CONSIDER: Are IDE0051 and IDE0052 too noisy to be warnings for IDE editing scenarios? Should they be made build-only warnings?
+# IDE0051: Remove unused private member
+dotnet_diagnostic.IDE0051.severity = warning
+# IDE0052: Remove unread private member
+dotnet_diagnostic.IDE0052.severity = warning
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = warning
+# IDE0059: Unnecessary assignment to a value
+dotnet_diagnostic.IDE0059.severity = warning
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = warning
+# IDE0065: 'using' directive placement
+dotnet_diagnostic.IDE0065.severity = warning
+# IDE0075: Simplify conditional expression
+dotnet_diagnostic.IDE0075.severity = warning
+# IDE0170: Prefer extended property pattern
+dotnet_diagnostic.IDE0170.severity = warning
+
+# FYI: rules that currently removed but required for cleanup
+# dotnet_style_allow_multiple_blank_lines_experimental
+dotnet_diagnostic.IDE2000.severity = warning
+# csharp_style_allow_embedded_statements_on_same_line_experimental
+dotnet_diagnostic.IDE2001.severity = warning
+# csharp_style_allow_blank_lines_between_consecutive_braces_experimental
+dotnet_diagnostic.IDE2002.severity = warning
+# dotnet_style_allow_statement_immediately_after_block_experimental
+dotnet_diagnostic.IDE2003.severity = warning
+# csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental
+dotnet_diagnostic.IDE2004.severity = warning
+
+# CS Rules
+# Missing XML comment for publicly visible type or member 'Type_or_Member'
+dotnet_diagnostic.CS1591.severity = none
+
+# StyleCop Rules
+# Special Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SpecialRules.md
+# SA0001: All diagnostics of XML documentation comments has been disabled due to the current project configuration.
+dotnet_diagnostic.SA0001.severity = warning
+# SA0002: The stylecop.json settings file could not be loaded due to a deserialization error.
+dotnet_diagnostic.SA0002.severity = warning
+
+# Spacing Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SpacingRules.md
+# SA1000: The spacing around a C# keyword is incorrect.
+dotnet_diagnostic.SA1000.severity = warning
+# SA1001: The spacing around a comma is incorrect, within a C# code file.
+dotnet_diagnostic.SA1001.severity = warning
+# SA1002: The spacing around a semicolon is incorrect, within a C# code file.
+dotnet_diagnostic.SA1002.severity = warning
+# SA1003: The spacing around an operator symbol is incorrect, within a C# code file.
+dotnet_diagnostic.SA1003.severity = warning
+# SA1004: A line within a documentation header above a C# element does not begin with a single space.
+dotnet_diagnostic.SA1004.severity = warning
+# SA1005: A single-line comment within a C# code file does not begin with a single space.
+dotnet_diagnostic.SA1005.severity = none
+# SA1006: A C# preprocessor-type keyword is preceded by space.
+dotnet_diagnostic.SA1006.severity = warning
+# SA1007: The operator keyword within a C# operator overload method is not followed by any whitespace.
+dotnet_diagnostic.SA1007.severity = warning
+# SA1008: An opening parenthesis within a C# statement is not spaced correctly.
+dotnet_diagnostic.SA1008.severity = warning
+# SA1009: A closing parenthesis within a C# statement is not spaced correctly.
+dotnet_diagnostic.SA1009.severity = warning
+# SA1010: An opening square bracket within a C# statement is not spaced correctly.
+dotnet_diagnostic.SA1010.severity = warning
+# SA1011: A closing square bracket within a C# statement is not spaced correctly.
+dotnet_diagnostic.SA1011.severity = warning
+# SA1012: An opening brace within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1012.severity = warning
+# SA1013: A closing brace within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1013.severity = warning
+# SA1014: An opening generic bracket within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1014.severity = warning
+# SA1015: A closing generic bracket within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1015.severity = warning
+# SA1016: An opening attribute bracket within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1016.severity = warning
+# SA1017: A closing attribute bracket within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1017.severity = warning
+# SA1018: A nullable type symbol within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1018.severity = warning
+# SA1019: The spacing around a member access symbol is incorrect, within a C# code file.
+dotnet_diagnostic.SA1019.severity = warning
+# SA1020: An increment or decrement symbol within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1020.severity = warning
+# SA1021: A negative sign within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1021.severity = warning
+# SA1022: A positive sign within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1022.severity = warning
+# SA1023: A dereference symbol or an access-of symbol within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1023.severity = warning
+# SA1024: A colon within a C# element is not spaced correctly.
+dotnet_diagnostic.SA1024.severity = warning
+# SA1025: The code contains multiple whitespace characters in a row.
+dotnet_diagnostic.SA1025.severity = warning
+# SA1026: An implicitly typed new array allocation within a C# code file is not spaced correctly.
+dotnet_diagnostic.SA1026.severity = warning
+# SA1027: The code contains a tab or space character which is not consistent with the current project settings.
+dotnet_diagnostic.SA1027.severity = warning
+# SA1028: A line of code ends with a space, tab, or other whitespace characters before the end of line character(s).
+dotnet_diagnostic.SA1028.severity = warning
+
+# Readability Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/ReadabilityRules.md
+# SA1100: A call to a member from an inherited class begins with base., and the local class does not contain an override or implementation of the member.
+dotnet_diagnostic.SA1100.severity = warning
+# SA1101: A call to an instance member of the local class or a base class is not prefixed with 'this.', within a C# code file.
+dotnet_diagnostic.SA1101.severity = none
+# SA1102: A C# query clause does not begin on the same line as the previous clause, or on the next line.
+dotnet_diagnostic.SA1102.severity = warning
+# SA1103: The clauses within a C# query expression are not all placed on the same line, and each clause is not placed on its own line.
+dotnet_diagnostic.SA1103.severity = warning
+# SA1104: A clause within a C# query expression begins on the same line as the previous clause, when the previous clause spans across multiple lines.
+dotnet_diagnostic.SA1104.severity = warning
+# SA1105: A clause within a C# query expression spans across multiple lines, and does not begin on its own line.
+dotnet_diagnostic.SA1105.severity = warning
+# SA1106: The C# code contains an extra semicolon.
+dotnet_diagnostic.SA1106.severity = warning
+# SA1107: The C# code contains more than one statement on a single line.
+dotnet_diagnostic.SA1107.severity = warning
+# SA1108: A C# statement contains a comment between the declaration of the statement and the opening brace of the statement.
+dotnet_diagnostic.SA1108.severity = warning
+# SA1109 (omitted): A C# statement contains a region tag between the declaration of the statement and the opening brace of the statement.
+dotnet_diagnostic.SA1109.severity = none
+# SA1110: The opening parenthesis or bracket in a call to a C# method or indexer, or the declaration of a method or indexer, is not placed on the same line as the method or indexer name.
+dotnet_diagnostic.SA1110.severity = warning
+# SA1111: The closing parenthesis or bracket in a call to a C# method or indexer, or the declaration of a method or indexer, is not placed on the same line as the last parameter.
+dotnet_diagnostic.SA1111.severity = warning
+# SA1112: The closing parenthesis or bracket in a call to a C# method or indexer, or the declaration of a method or indexer, is not placed on the same line as the opening bracket when the element does not take any parameters.
+dotnet_diagnostic.SA1112.severity = warning
+# SA1113: A comma between two parameters in a call to a C# method or indexer, or in the declaration of a method or indexer, is not placed on the same line as the previous parameter.
+dotnet_diagnostic.SA1113.severity = warning
+# SA1114: The start of the parameter list for a method or indexer call or declaration does not begin on the same line as the opening bracket, or on the line after the opening bracket.
+dotnet_diagnostic.SA1114.severity = warning
+# SA1115: A parameter within a C# method or indexer call or declaration does not begin on the same line as the previous parameter, or on the next line.
+dotnet_diagnostic.SA1115.severity = warning
+# SA1116: The parameters to a C# method or indexer call or declaration span across multiple lines, but the first parameter does not start on the line after the opening bracket.
+dotnet_diagnostic.SA1116.severity = warning
+# SA1117: The parameters to a C# method or indexer call or declaration are not all on the same line or each on a separate line.
+dotnet_diagnostic.SA1117.severity = warning
+# SA1118: A parameter to a C# method or indexer, other than the first parameter, spans across multiple lines.
+dotnet_diagnostic.SA1118.severity = warning
+# SA1120: The C# comment does not contain any comment text.
+dotnet_diagnostic.SA1120.severity = none
+# SA1121: The code uses one of the basic C# types, but does not use the built-in alias for the type.
+dotnet_diagnostic.SA1121.severity = warning
+# SA1122: The C# code includes an empty string, written as """".
+dotnet_diagnostic.SA1122.severity = warning
+# SA1123: The C# code contains a region within the body of a code element.
+dotnet_diagnostic.SA1123.severity = warning
+# SA1124: The C# code contains a region.
+dotnet_diagnostic.SA1124.severity = none
+# SA1125: The Nullable type has been defined not using the C# shorthand.
+dotnet_diagnostic.SA1125.severity = warning
+# SA1126 (omitted): A call to a member is not prefixed with the 'this.', 'base.', 'object.' or 'typename.' prefix to indicate the intended method call, within a C# code file.
+dotnet_diagnostic.SA1126.severity = none
+# SA1127: A generic constraint on a type or method declaration is on the same line as the declaration, within a C# code file.
+dotnet_diagnostic.SA1127.severity = warning
+# SA1128: A constructor initializer is on the same line as the constructor declaration, within a C# code file.
+dotnet_diagnostic.SA1128.severity = warning
+# SA1129: A value type was constructed using the syntax new T().
+dotnet_diagnostic.SA1129.severity = warning
+# SA1130: An anonymous method was declared using the form delegate (parameters) { }, when a lambda expression would provide equivalent behavior with the syntax (parameters) => { }.
+dotnet_diagnostic.SA1130.severity = warning
+# SA1131: A comparison was made between a variable and a literal or constant value, and the variable appeared on the right-hand side of the expression.
+dotnet_diagnostic.SA1131.severity = warning
+# SA1132: Two or more fields were declared in the same field declaration syntax.
+dotnet_diagnostic.SA1132.severity = warning
+# SA1133: Two or more attributes appeared within the same set of square brackets.
+dotnet_diagnostic.SA1133.severity = warning
+# SA1134: An attribute is placed on the same line of code as another attribute or element.
+dotnet_diagnostic.SA1134.severity = warning
+# SA1135: A using directive is not qualified.
+dotnet_diagnostic.SA1135.severity = warning
+# SA1136: Multiple enum values are placed on the same line of code.
+dotnet_diagnostic.SA1136.severity = warning
+# SA1137: Two sibling elements which each start on their own line have different levels of indentation.
+dotnet_diagnostic.SA1137.severity = warning
+# SA1139: Use literal suffix notation instead of casting.
+dotnet_diagnostic.SA1139.severity = warning
+# SA1141: Use tuple syntax instead of the underlying ValueTuple implementation type.
+dotnet_diagnostic.SA1141.severity = warning
+# SA1142: An element of a tuple was referenced by its metadata name when an element name is available.
+dotnet_diagnostic.SA1142.severity = warning
+
+# Ordering Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/OrderingRules.md
+# SA1200: A C# using directive is placed outside of a namespace element.
+dotnet_diagnostic.SA1200.severity = none
+# SA1201: An element within a C# code file is out of order in relation to the other elements in the code.
+dotnet_diagnostic.SA1201.severity = none
+# SA1202: An element within a C# code file is out of order within regard to access level, in relation to other elements in the code.
+dotnet_diagnostic.SA1202.severity = none
+# SA1203: A constant field is placed beneath a non-constant field.
+dotnet_diagnostic.SA1203.severity = none
+# SA1204: A static element is positioned beneath an instance element of the same type.
+dotnet_diagnostic.SA1204.severity = none
+# SA1205: The partial element does not have an access modifier defined.
+dotnet_diagnostic.SA1205.severity = warning
+# SA1206: The keywords within the declaration of an element do not follow a standard ordering scheme.
+dotnet_diagnostic.SA1206.severity = warning
+# SA1207: The keyword protected is positioned after the keyword internal within the declaration of a protected internal C# element.
+dotnet_diagnostic.SA1207.severity = warning
+# SA1208: A using directive which declares a member of the System namespace appears after a using directive which declares a member of a different namespace, within a C# code file.
+dotnet_diagnostic.SA1208.severity = warning
+# SA1209: A using-alias directive is positioned before a regular using directive.
+dotnet_diagnostic.SA1209.severity = warning
+# SA1210: The using directives within a C# code file are not sorted alphabetically by namespace.
+dotnet_diagnostic.SA1210.severity = warning
+# SA1211: The using-alias directives within a C# code file are not sorted alphabetically by alias name.
+dotnet_diagnostic.SA1211.severity = warning
+# SA1212: A get accessor appears after a set accessor within a property or indexer.
+dotnet_diagnostic.SA1212.severity = warning
+# SA1213: An add accessor appears after a remove accessor within an event.
+dotnet_diagnostic.SA1213.severity = warning
+# SA1214: A readonly field is positioned beneath a non-readonly field.
+dotnet_diagnostic.SA1214.severity = none
+# SA1215 (omitted): An instance readonly element is positioned beneath an instance non-readonly element of the same type.
+dotnet_diagnostic.SA1215.severity = none
+# SA1216: A using static directive is positioned at the wrong location (before a regular using directive or after an alias using directive).
+dotnet_diagnostic.SA1216.severity = warning
+# SA1217: The using static directives within a C# code file are not sorted alphabetically by full type name.
+dotnet_diagnostic.SA1217.severity = warning
+
+# Naming Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/NamingRules.md
+# SA1300: The name of a C# element does not begin with an upper-case letter.
+dotnet_diagnostic.SA1300.severity = none
+# SA1301: There are currently no situations in which this rule will fire.
+dotnet_diagnostic.SA1301.severity = none
+# SA1302: The name of a C# interface does not begin with the capital letter I.
+dotnet_diagnostic.SA1302.severity = warning
+# SA1303: The name of a constant C# field should begin with an upper-case letter.
+dotnet_diagnostic.SA1303.severity = warning
+# SA1304: The name of a non-private readonly C# field should being with an upper-case letter.
+dotnet_diagnostic.SA1304.severity = warning
+# SA1305 (disabled): The name of a field or variable in C# uses Hungarian notation.
+dotnet_diagnostic.SA1305.severity = none
+# SA1306: The name of a field in C# does not begin with a lower-case letter.
+dotnet_diagnostic.SA1306.severity = none
+# SA1307: The name of a public or internal field in C# does not begin with an upper-case letter.
+dotnet_diagnostic.SA1307.severity = none
+# SA1308: A field name in C# is prefixed with m_ or s_.
+dotnet_diagnostic.SA1308.severity = none
+# SA1309: A field name in C# begins with an underscore.
+dotnet_diagnostic.SA1309.severity = none
+# SA1310: A field name in C# contains an underscore.
+dotnet_diagnostic.SA1310.severity = none
+# SA1311: The name of a static readonly field does not begin with an upper-case letter.
+dotnet_diagnostic.SA1311.severity = none
+# SA1312: The name of a variable in C# does not begin with a lower-case letter.
+dotnet_diagnostic.SA1312.severity = none
+# SA1313: The name of a parameter in C# does not begin with a lower-case letter.
+dotnet_diagnostic.SA1313.severity = none
+# SA1314: The name of a C# type parameter does not begin with the capital letter T.
+dotnet_diagnostic.SA1314.severity = none
+# SA1316: Element names within a tuple type should have the correct casing.
+dotnet_diagnostic.SA1316.severity = warning
+
+# Maintainability Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/MaintainabilityRules.md
+# SA1119: A C# statement contains parenthesis which are unnecessary and should be removed.
+dotnet_diagnostic.SA1119.severity = warning
+# SA1400: The access modifier for a C# element has not been explicitly defined.
+dotnet_diagnostic.SA1400.severity = warning
+# SA1401: A field within a C# class has an access modifier other than private.
+dotnet_diagnostic.SA1401.severity = warning
+# SA1402: A C# code file contains more than one unique type.
+dotnet_diagnostic.SA1402.severity = none
+# SA1403: A C# code file contains more than one namespace.
+dotnet_diagnostic.SA1403.severity = none
+# SA1404: A Code Analysis SuppressMessage attribute does not include a justification.
+dotnet_diagnostic.SA1404.severity = warning
+# SA1405: A call to Debug.Assert in C# code does not include a descriptive message.
+dotnet_diagnostic.SA1405.severity = warning
+# SA1406: A call to Debug.Fail in C# code does not include a descriptive message.
+dotnet_diagnostic.SA1406.severity = warning
+# SA1407: A C# statement contains a complex arithmetic expression which omits parenthesis around operators.
+dotnet_diagnostic.SA1407.severity = warning
+# SA1408: A C# statement contains a complex conditional expression which omits parenthesis around operators.
+dotnet_diagnostic.SA1408.severity = warning
+# SA1409 (omitted): A C# file contains code which is unnecessary and can be removed without changing the overall logic of the code.
+dotnet_diagnostic.SA1409.severity = none
+# SA1410: A call to a C# anonymous method does not contain any method parameters, yet the statement still includes parenthesis.
+dotnet_diagnostic.SA1410.severity = warning
+# SA1411: An attribute declaration does not contain any parameters, yet it still includes parenthesis.
+dotnet_diagnostic.SA1411.severity = warning
+# SA1412: The encoding of the file is not UTF-8 with byte order mark.
+dotnet_diagnostic.SA1412.severity = warning
+# SA1413: A multi-line initializer should use a comma on the last item.
+dotnet_diagnostic.SA1413.severity = warning
+# SA1414: Tuple types appearing in member declarations should have explicitly named tuple elements.
+dotnet_diagnostic.SA1414.severity = warning
+
+# Layout Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/LayoutRules.md
+# SA1500: The opening or closing brace within a C# statement, element, or expression is not placed on its own line.
+dotnet_diagnostic.SA1500.severity = warning
+# SA1501: A C# statement containing opening and closing braces is written completely on a single line.
+dotnet_diagnostic.SA1501.severity = warning
+# SA1502: A C# element containing opening and closing braces is written completely on a single line.
+dotnet_diagnostic.SA1502.severity = warning
+# SA1503: The opening and closing braces for a C# statement have been omitted.
+dotnet_diagnostic.SA1503.severity = warning
+# SA1504: Within a C# property, indexer or event, at least one of the child accessors is written on a single line, and at least one of the child accessors is written across multiple lines.
+dotnet_diagnostic.SA1504.severity = warning
+# SA1505: An opening brace within a C# element, statement, or expression is followed by a blank line.
+dotnet_diagnostic.SA1505.severity = warning
+# SA1506: An element documentation header above a C# element is followed by a blank line.
+dotnet_diagnostic.SA1506.severity = warning
+# SA1507: The C# code contains multiple blank lines in a row.
+dotnet_diagnostic.SA1507.severity = warning
+# SA1508: A closing brace within a C# element, statement, or expression is preceded by a blank line.
+dotnet_diagnostic.SA1508.severity = warning
+# SA1509: An opening brace within a C# element, statement, or expression is preceded by a blank line.
+dotnet_diagnostic.SA1509.severity = warning
+# SA1510: Chained C# statements are separated by a blank line.
+dotnet_diagnostic.SA1510.severity = warning
+# SA1511: The while footer at the bottom of a do-while statement is separated from the statement by a blank line.
+dotnet_diagnostic.SA1511.severity = warning
+# SA1512: A single-line comment within C# code is followed by a blank line.
+dotnet_diagnostic.SA1512.severity = none
+# SA1513: A closing brace within a C# element, statement, or expression is not followed by a blank line.
+dotnet_diagnostic.SA1513.severity = warning
+# SA1514: An element documentation header above a C# element is not preceded by a blank line.
+dotnet_diagnostic.SA1514.severity = warning
+# SA1515: A single-line comment within C# code is not preceded by a blank line.
+dotnet_diagnostic.SA1515.severity = none
+# SA1516: Adjacent C# elements are not separated by a blank line.
+dotnet_diagnostic.SA1516.severity = none
+# SA1517: The code file has blank lines at the start.
+dotnet_diagnostic.SA1517.severity = warning
+# SA1518: The line endings at the end of a file do not match the settings for the project.
+dotnet_diagnostic.SA1518.severity = warning
+# SA1519: The opening and closing braces for a multi-line C# statement have been omitted.
+dotnet_diagnostic.SA1519.severity = warning
+# SA1520: The opening and closing braces of a chained if/else if/else construct were included for some clauses, but omitted for others.
+dotnet_diagnostic.SA1520.severity = warning
+
+# Documentation Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/DocumentationRules.md
+# SA1600: A C# code element is missing a documentation header.
+dotnet_diagnostic.SA1600.severity = none
+# SA1601: A C# partial element is missing a documentation header.
+dotnet_diagnostic.SA1601.severity = warning
+# SA1602: An item within a C# enumeration is missing an Xml documentation header.
+dotnet_diagnostic.SA1602.severity = none
+# SA1603 (omitted): The Xml within a C# element's document header is badly formed.
+dotnet_diagnostic.SA1603.severity = none
+# SA1604: The Xml header documentation for a C# element is missing a <summary> tag.
+dotnet_diagnostic.SA1604.severity = warning
+# SA1605: The <summary> or <content> tag within the documentation header for a C# code element is missing or empty.
+dotnet_diagnostic.SA1605.severity = warning
+# SA1606: The <summary> tag within the documentation header for a C# code element is empty.
+dotnet_diagnostic.SA1606.severity = warning
+# SA1607: The <summary> or <content> tag within the documentation header for a C# code element is empty.
+dotnet_diagnostic.SA1607.severity = warning
+# SA1608: The <summary> tag within an element's Xml header documentation contains the default text generated by Visual Studio during the creation of the element.
+dotnet_diagnostic.SA1608.severity = warning
+# SA1609: The Xml header documentation for a C# property does not contain a <value> tag.
+dotnet_diagnostic.SA1609.severity = warning
+# SA1610: The Xml header documentation for a C# property contains an empty <value> tag.
+dotnet_diagnostic.SA1610.severity = warning
+# SA1611: A C# method, constructor, delegate or indexer element is missing documentation for one or more of its parameters.
+dotnet_diagnostic.SA1611.severity = warning
+# SA1612: The documentation describing the parameters to a C# method, constructor, delegate or indexer element does not match the actual parameters on the element.
+dotnet_diagnostic.SA1612.severity = warning
+# SA1613: A <param> tag within a C# element's documentation header is missing a name attribute containing the name of the parameter.
+dotnet_diagnostic.SA1613.severity = warning
+# SA1614: A <param> tag within a C# element's documentation header is empty.
+dotnet_diagnostic.SA1614.severity = warning
+# SA1615: A C# element is missing documentation for its return value.
+dotnet_diagnostic.SA1615.severity = warning
+# SA1616: The <returns> tag within a C# element's documentation header is empty.
+dotnet_diagnostic.SA1616.severity = none
+# SA1617: A C# code element does not contain a return value, or returns void, but the documentation header for the element contains a <returns> tag.
+dotnet_diagnostic.SA1617.severity = warning
+# SA1618: A generic C# element is missing documentation for one or more of its generic type parameters.
+dotnet_diagnostic.SA1618.severity = warning
+# SA1619: A generic, partial C# element is missing documentation for one or more of its generic type parameters, and the documentation for the element contains a <summary> tag.
+dotnet_diagnostic.SA1619.severity = warning
+# SA1620: The <typeparam> tags within the Xml header documentation for a generic C# element do not match the generic type parameters on the element.
+dotnet_diagnostic.SA1620.severity = warning
+# SA1621: A <typeparam> tag within the Xml header documentation for a generic C# element is missing a name attribute, or contains an empty name attribute.
+dotnet_diagnostic.SA1621.severity = warning
+# SA1622: A <typeparam> tag within the Xml header documentation for a generic C# element is empty.
+dotnet_diagnostic.SA1622.severity = warning
+# SA1623: The documentation text within a C# property's <summary> tag does not match the accessors within the property.
+dotnet_diagnostic.SA1623.severity = none
+# SA1624: The documentation text within a C# property's <summary> tag takes into account all of the accessors within the property, but one of the accessors has limited access.
+dotnet_diagnostic.SA1624.severity = warning
+# SA1625: The Xml documentation for a C# element contains two or more identical entries, indicating that the documentation has been copied and pasted.
+dotnet_diagnostic.SA1625.severity = warning
+# SA1626: The C# code contains a single-line comment which begins with three forward slashes in a row.
+dotnet_diagnostic.SA1626.severity = warning
+# SA1627: The Xml header documentation for a C# code element contains an empty tag.
+dotnet_diagnostic.SA1627.severity = warning
+# SA1628 (omitted): A section of the Xml header documentation for a C# element does not begin with a capital letter.
+dotnet_diagnostic.SA1628.severity = none
+# SA1629: A section of the Xml header documentation for a C# element does not end with a period (also known as a full stop).
+dotnet_diagnostic.SA1629.severity = none
+# SA1630 (omitted): A section of the Xml header documentation for a C# element does not contain any whitespace between words.
+dotnet_diagnostic.SA1630.severity = none
+# SA1631 (omitted): A section of the Xml header documentation for a C# element does not contain enough alphabetic characters.
+dotnet_diagnostic.SA1631.severity = none
+# SA1632 (omitted): A section of the Xml header documentation for a C# element is too short.
+dotnet_diagnostic.SA1632.severity = none
+# SA1633: A C# code file is missing a standard file header.
+dotnet_diagnostic.SA1633.severity = none
+# SA1634: The file header at the top of a C# code file is missing a copyright tag.
+dotnet_diagnostic.SA1634.severity = warning
+# SA1635: The file header at the top of a C# code file is missing copyright text.
+dotnet_diagnostic.SA1635.severity = warning
+# SA1636: The file header at the top of a C# code file does not contain the appropriate copyright text.
+dotnet_diagnostic.SA1636.severity = none
+# SA1637: The file header at the top of a C# code file is missing the file name.
+dotnet_diagnostic.SA1637.severity = warning
+# SA1638: The file tag within the file header at the top of a C# code file does not contain the name of the file.
+dotnet_diagnostic.SA1638.severity = warning
+# SA1639 (disabled): The file header at the top of a C# code file does not contain a filled-in summary tag.
+dotnet_diagnostic.SA1639.severity = none
+# SA1640: The file header at the top of a C# code file does not contain company name text.
+dotnet_diagnostic.SA1640.severity = warning
+# SA1641: The file header at the top of a C# code file does not contain the appropriate company name text.
+dotnet_diagnostic.SA1641.severity = none
+# SA1642: The XML documentation header for a C# constructor does not contain the appropriate summary text.
+dotnet_diagnostic.SA1642.severity = none
+# SA1643: The Xml documentation header for a C# finalizer does not contain the appropriate summary text.
+dotnet_diagnostic.SA1643.severity = none
+# SA1644 (omitted): A section within the Xml documentation header for a C# element contains blank lines.
+dotnet_diagnostic.SA1644.severity = none
+# SA1645 (omitted): An included Xml documentation file does not exist.
+dotnet_diagnostic.SA1645.severity = none
+# SA1646 (omitted): An included Xml documentation link contains an invalid path.
+dotnet_diagnostic.SA1646.severity = none
+# SA1647 (omitted): An include tag within an Xml documentation header does not contain valid file and path attribute.
+dotnet_diagnostic.SA1647.severity = none
+# SA1648: <inheritdoc> has been used on an element that doesn't inherit from a base class or implement an interface.
+dotnet_diagnostic.SA1648.severity = warning
+# SA1649: The file name of a C# code file does not match the first type declared in the file.
+dotnet_diagnostic.SA1649.severity = none
+# SA1650 (omitted): The element documentation for the element contains one or more spelling mistakes or unrecognized words.
+dotnet_diagnostic.SA1650.severity = none
+# SA1651: The documentation for the element contains one or more <placeholder> elements.
+dotnet_diagnostic.SA1651.severity = warning
+
+# Alternative Rules https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/AlternativeRules.md
+# SX1101: A call to an instance member of the local class or a base class is prefixed with 'this.', within a C# code file.
+dotnet_diagnostic.SX1101.severity = warning
+# SX1309: A field name does not begin with an underscore.
+dotnet_diagnostic.SX1309.severity = none
+# SX1309S: A static field name does not begin with an underscore.
+dotnet_diagnostic.SX1309S.severity = none

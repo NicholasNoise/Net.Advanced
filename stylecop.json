@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "indentation": {
+      "indentationSize": 2,
+      "useTabs": false
+    },
+    "spacingRules": {
+    },
+    "readabilityRules": {
+      "allowBuiltInTypeAliases": false
+    },
+    "orderingRules": {
+      "elementOrder": [
+        "kind",
+        "accessibility",
+        "constant",
+        "static",
+        "readonly"
+      ],
+      "systemUsingDirectivesFirst": true,
+      "usingDirectivesPlacement": "outsideNamespace",
+      "blankLinesBetweenUsingGroups": "allow"
+    },
+    "namingRules": {
+      "allowCommonHungarianPrefixes": true,
+      "allowedHungarianPrefixes": [],
+      "allowedNamespaceComponents": [
+        "log4net"
+      ],
+      "includeInferredTupleElementNames": false,
+      "tupleElementNameCasing": "PascalCase"
+    },
+    "maintainabilityRules": {
+      "topLevelTypes": [
+        "class",
+        "interface"
+      ]
+    },
+    "layoutRules": {
+      "newlineAtEndOfFile": "require",
+      "allowConsecutiveUsings": false
+    },
+    "documentationRules": {
+      "companyName": "EPAM",
+      "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.",
+      "xmlHeader": true,
+      "variables": {},
+      "headerDecoration": "",
+      "documentInterfaces": true,
+      "documentExposedElements": false,
+      "documentInternalElements": false,
+      "documentPrivateElements": false,
+      "documentPrivateFields": false,
+      "documentationCulture": "en-US",
+      "fileNamingConvention": "metadata",
+      "excludeFromPunctuationCheck": [ "seealso" ]
+    }
+  }
+}
