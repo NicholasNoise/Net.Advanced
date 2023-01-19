@@ -16,6 +16,7 @@ public class Update : Endpoint<UpdateProductRequest, ProductRecord>
     _categoryRepository = categoryRepository;
   }
 
+  /// <inheritdoc/>
   public override void Configure()
   {
     Put(CreateProductRequest.Route);
@@ -23,6 +24,8 @@ public class Update : Endpoint<UpdateProductRequest, ProductRecord>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
+
+  /// <inheritdoc/>
   public override async Task HandleAsync(
     UpdateProductRequest request,
     CancellationToken cancellationToken)

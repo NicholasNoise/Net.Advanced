@@ -1,7 +1,7 @@
 ﻿using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
-using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Core.CatalogAggregate;
+using Net.Advanced.SharedKernel.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Net.Advanced.Web.Endpoints.CategoryEndpoints;
@@ -17,6 +17,7 @@ public class Delete : EndpointBaseAsync
     _repository = repository;
   }
 
+  /// <inheritdoc/>
   [HttpDelete(DeleteCategoryRequest.Route)]
   [SwaggerOperation(
     Summary = "Deletes a Category",

@@ -1,7 +1,7 @@
 ﻿using Ardalis.ApiEndpoints;
+using Microsoft.AspNetCore.Mvc;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Net.Advanced.Web.Endpoints.ProjectEndpoints;
@@ -17,6 +17,7 @@ public class Delete : EndpointBaseAsync
     _repository = repository;
   }
 
+  /// <inheritdoc/>
   [HttpDelete(DeleteProjectRequest.Route)]
   [SwaggerOperation(
       Summary = "Deletes a Project",
@@ -25,8 +26,8 @@ public class Delete : EndpointBaseAsync
       Tags = new[] { "ProjectEndpoints" })
   ]
   public override async Task<ActionResult> HandleAsync(
-    [FromRoute] DeleteProjectRequest request,
-      CancellationToken cancellationToken = new())
+      [FromRoute] DeleteProjectRequest request,
+      CancellationToken cancellationToken = default(CancellationToken))
   {
     var aggregateToDelete = await _repository.GetByIdAsync(request.ProjectId, cancellationToken);
     if (aggregateToDelete == null)

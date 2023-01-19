@@ -17,4 +17,4 @@ public record CategoryRecord(int Id, string Name, string? Image, CategoryRecord?
       category.Image,
       category.Parent is null ? null : FromCategory(category.Parent));
   }
-};
+}

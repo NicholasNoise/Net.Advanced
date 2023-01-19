@@ -1,7 +1,7 @@
-﻿using Net.Advanced.Core.ContributorAggregate.Events;
-using Net.Advanced.SharedKernel.Interfaces;
+﻿using MediatR;
+using Net.Advanced.Core.ContributorAggregate.Events;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
-using MediatR;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Core.ProjectAggregate.Handlers;
 
@@ -14,6 +14,7 @@ public class ContributorDeletedHandler : INotificationHandler<ContributorDeleted
     _repository = repository;
   }
 
+  /// <inheritdoc/>
   public async Task Handle(ContributorDeletedEvent domainEvent, CancellationToken cancellationToken)
   {
     var projectSpec = new ProjectsWithItemsByContributorIdSpec(domainEvent.ContributorId);

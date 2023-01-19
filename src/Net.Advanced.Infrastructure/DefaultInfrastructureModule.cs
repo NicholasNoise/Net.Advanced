@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using Autofac;
+using MediatR;
+using MediatR.Pipeline;
 using Net.Advanced.Core.Interfaces;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Infrastructure.Data;
 using Net.Advanced.SharedKernel;
 using Net.Advanced.SharedKernel.Interfaces;
-using MediatR;
-using MediatR.Pipeline;
 using Module = Autofac.Module;
 
 namespace Net.Advanced.Infrastructure;
@@ -38,6 +38,7 @@ public class DefaultInfrastructureModule : Module
     }
   }
 
+  /// <inheritdoc/>
   protected override void Load(ContainerBuilder builder)
   {
     if (_isDevelopment)
@@ -78,8 +79,8 @@ public class DefaultInfrastructureModule : Module
 
     var mediatrOpenTypes = new[]
     {
-      typeof(IRequestHandler<,>), 
-      typeof(IRequestExceptionHandler<,,>), 
+      typeof(IRequestHandler<,>),
+      typeof(IRequestExceptionHandler<,,>),
       typeof(IRequestExceptionAction<,>),
       typeof(INotificationHandler<>),
     };

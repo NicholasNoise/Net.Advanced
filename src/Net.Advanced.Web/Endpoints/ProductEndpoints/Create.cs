@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.CatalogAggregate;
+﻿using FastEndpoints;
+using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.ProductEndpoints;
 
@@ -16,6 +16,7 @@ public class Create : Endpoint<CreateProductRequest, ProductRecord>
     _categoryRepository = categoryRepository;
   }
 
+  /// <inheritdoc/>
   public override void Configure()
   {
     Post(CreateProductRequest.Route);
@@ -23,6 +24,8 @@ public class Create : Endpoint<CreateProductRequest, ProductRecord>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
+
+  /// <inheritdoc/>
   public override async Task HandleAsync(
     CreateProductRequest request,
     CancellationToken cancellationToken)

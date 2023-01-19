@@ -18,8 +18,8 @@ public class ProjectItemMarkComplete : IClassFixture<CustomWebApplicationFactory
   [Fact]
   public async Task MarksIncompleteItemComplete()
   {
-    int projectId = 1;
-    int itemId = 1;
+    var projectId = 1;
+    var itemId = 1;
 
     var jsonContent = new StringContent(JsonConvert.SerializeObject(null), Encoding.UTF8, "application/json");
 
@@ -27,6 +27,6 @@ public class ProjectItemMarkComplete : IClassFixture<CustomWebApplicationFactory
     response.EnsureSuccessStatusCode();
 
     var stringResponse = await response.Content.ReadAsStringAsync();
-    Assert.Equal("", stringResponse);
+    Assert.Equal(string.Empty, stringResponse);
   }
 }

@@ -1,6 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
-using Net.Advanced.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Net.Advanced.Core.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Net.Advanced.Web.Endpoints.ProjectEndpoints;
@@ -16,6 +16,7 @@ public class ListIncomplete : EndpointBaseAsync
     _searchService = searchService;
   }
 
+  /// <inheritdoc/>
   [HttpGet("/Projects/{ProjectId}/IncompleteItems")]
   [SwaggerOperation(
     Summary = "Gets a list of a project's incomplete items",
@@ -25,7 +26,7 @@ public class ListIncomplete : EndpointBaseAsync
   ]
   public override async Task<ActionResult<ListIncompleteResponse>> HandleAsync(
     [FromQuery] ListIncompleteRequest request,
-    CancellationToken cancellationToken = new())
+    CancellationToken cancellationToken = default(CancellationToken))
   {
     if (request.SearchString == null)
     {
@@ -40,7 +41,8 @@ public class ListIncomplete : EndpointBaseAsync
       response.ProjectId = request.ProjectId;
       response.IncompleteItems = new List<ToDoItemRecord>(
         result.Value.Select(
-          item => new ToDoItemRecord(item.Id,
+          item => new ToDoItemRecord(
+            item.Id,
             item.Title,
             item.Description,
             item.IsDone)));

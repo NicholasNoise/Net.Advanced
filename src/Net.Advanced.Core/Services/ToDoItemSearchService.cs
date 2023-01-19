@@ -15,13 +15,14 @@ public class ToDoItemSearchService : IToDoItemSearchService
     _repository = repository;
   }
 
+  /// <inheritdoc/>
   public async Task<Result<List<ToDoItem>>> GetAllIncompleteItemsAsync(int projectId, string searchString)
   {
     if (string.IsNullOrEmpty(searchString))
     {
       var errors = new List<ValidationError>
       {
-        new() { Identifier = nameof(searchString), ErrorMessage = $"{nameof(searchString)} is required." }
+        new() { Identifier = nameof(searchString), ErrorMessage = $"{nameof(searchString)} is required." },
       };
 
       return Result<List<ToDoItem>>.Invalid(errors);
@@ -50,6 +51,7 @@ public class ToDoItemSearchService : IToDoItemSearchService
     }
   }
 
+  /// <inheritdoc/>
   public async Task<Result<ToDoItem>> GetNextIncompleteItemAsync(int projectId)
   {
     var projectSpec = new ProjectByIdWithItemsSpec(projectId);

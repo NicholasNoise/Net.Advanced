@@ -18,7 +18,7 @@ public class DeleteTests : BaseWebFixture
   public async Task DeletesSeededProduct()
   {
     // Arrange.
-    string route = DeleteProductRequest.BuildRoute(SeedData.Product2.Id);
+    var route = DeleteProductRequest.BuildRoute(SeedData.Product2.Id);
 
     // Act.
     var response = await Client.DeleteAndEnsureNoContentAsync(route);
@@ -33,7 +33,7 @@ public class DeleteTests : BaseWebFixture
   {
     // Arrange.
     const int productId = 0;
-    string route = DeleteProductRequest.BuildRoute(productId);
+    var route = DeleteProductRequest.BuildRoute(productId);
 
     // Act.
     var response = await Client.DeleteAndEnsureNotFoundAsync(route);

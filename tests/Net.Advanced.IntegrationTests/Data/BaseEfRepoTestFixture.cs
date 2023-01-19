@@ -1,26 +1,26 @@
-﻿using Net.Advanced.Infrastructure.Data;
-using Net.Advanced.SharedKernel.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using Net.Advanced.Infrastructure.Data;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.IntegrationTests.Data;
 
 public abstract class BaseEfRepoTestFixture
 {
-  protected AppDbContext _dbContext;
-
   protected BaseEfRepoTestFixture()
   {
     var options = CreateNewContextOptions();
     var mockEventDispatcher = new Mock<IDomainEventDispatcher>();
 
-    _dbContext = new AppDbContext(options, mockEventDispatcher.Object);
-    _dbContext.Database.EnsureDeleted();
-    _dbContext.Database.EnsureCreated();
+    DbContext = new AppDbContext(options, mockEventDispatcher.Object);
+    DbContext.Database.EnsureDeleted();
+    DbContext.Database.EnsureCreated();
   }
 
   protected abstract string DbName { get; }
+
+  protected AppDbContext DbContext { get; }
 
   protected DbContextOptions<AppDbContext> CreateNewContextOptions()
   {
@@ -42,8 +42,9 @@ public abstract class BaseEfRepoTestFixture
     return builder.Options;
   }
 
-  protected EfRepository<T> GetRepository<T>() where T : class, IAggregateRoot
+  protected EfRepository<T> GetRepository<T>()
+    where T : class, IAggregateRoot
   {
-    return new EfRepository<T>(_dbContext);
+    return new EfRepository<T>(DbContext);
   }
 }

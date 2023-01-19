@@ -1,7 +1,7 @@
 ﻿using Ardalis.ApiEndpoints;
+using Microsoft.AspNetCore.Mvc;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Net.Advanced.Web.Endpoints.ProjectEndpoints;
@@ -17,6 +17,7 @@ public class Create : EndpointBaseAsync
     _repository = repository;
   }
 
+  /// <inheritdoc/>
   [HttpPost("/Projects")]
   [SwaggerOperation(
     Summary = "Creates a new Project",
@@ -26,7 +27,7 @@ public class Create : EndpointBaseAsync
   ]
   public override async Task<ActionResult<CreateProjectResponse>> HandleAsync(
     CreateProjectRequest request,
-    CancellationToken cancellationToken = new())
+    CancellationToken cancellationToken = default(CancellationToken))
   {
     if (request.Name == null)
     {
@@ -35,11 +36,9 @@ public class Create : EndpointBaseAsync
 
     var newProject = new Project(request.Name, PriorityStatus.Backlog);
     var createdItem = await _repository.AddAsync(newProject, cancellationToken);
-    var response = new CreateProjectResponse
-    (
+    var response = new CreateProjectResponse(
       id: createdItem.Id,
-      name: createdItem.Name
-    );
+      name: createdItem.Name);
 
     return Ok(response);
   }

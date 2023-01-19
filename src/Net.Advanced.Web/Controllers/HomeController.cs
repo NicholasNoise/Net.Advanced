@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using Net.Advanced.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Net.Advanced.Web.ViewModels;
 
 namespace Net.Advanced.Web.Controllers;
 

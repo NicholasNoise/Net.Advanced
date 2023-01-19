@@ -27,7 +27,7 @@ public class ToDoItem : EntityBase
     ContributorId = contributorId;
 
     var contributorAddedToItem = new ContributorAddedToItemEvent(this, contributorId);
-    base.RegisterDomainEvent(contributorAddedToItem);
+    RegisterDomainEvent(contributorAddedToItem);
   }
 
   public void RemoveContributor()
@@ -35,9 +35,10 @@ public class ToDoItem : EntityBase
     ContributorId = null;
   }
 
+  /// <inheritdoc/>
   public override string ToString()
   {
-    string status = IsDone ? "Done!" : "Not done.";
+    var status = IsDone ? "Done!" : "Not done.";
     return $"{Id}: Status: {status} - {Title} - {Description}";
   }
 }

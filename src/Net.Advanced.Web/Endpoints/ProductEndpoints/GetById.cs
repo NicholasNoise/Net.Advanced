@@ -1,7 +1,6 @@
 ﻿using FastEndpoints;
-using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Core.CatalogAggregate;
-using Net.Advanced.Core.CatalogAggregate.Specifications;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Web.Endpoints.ProductEndpoints;
 
@@ -14,6 +13,7 @@ public class GetById : Endpoint<GetProductByIdRequest, ProductRecord>
     _repository = repository;
   }
 
+  /// <inheritdoc/>
   public override void Configure()
   {
     Get(GetProductByIdRequest.Route);
@@ -21,8 +21,10 @@ public class GetById : Endpoint<GetProductByIdRequest, ProductRecord>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
+
+  /// <inheritdoc/>
   public override async Task HandleAsync(
-    GetProductByIdRequest request, 
+    GetProductByIdRequest request,
     CancellationToken cancellationToken)
   {
     var entity = await _repository.GetByIdAsync(request.ProductId, cancellationToken);
