@@ -1,4 +1,4 @@
-﻿namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
+namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
 public class CreateContributorResponse
 {
@@ -7,7 +7,6 @@ public class CreateContributorResponse
     Id = id;
     Name = name;
   }
-
   public int Id { get; set; }
   public string Name { get; set; }
 }

@@ -18,7 +18,7 @@ public class GetByIdTests : BaseWebFixture
   {
     // Arrange.
     const int categoryId = 1;
-    var route = GetCategoryByIdRequest.BuildRoute(categoryId);
+    string route = GetCategoryByIdRequest.BuildRoute(categoryId);
 
     // Act.
     var result = await Client.GetAndDeserializeAsync<CategoryRecord>(route);
@@ -33,7 +33,7 @@ public class GetByIdTests : BaseWebFixture
   {
     // Arrange.
     const int categoryId = 0;
-    var route = GetCategoryByIdRequest.BuildRoute(categoryId);
+    string route = GetCategoryByIdRequest.BuildRoute(categoryId);
 
     // Assert.
     _ = await Client.GetAndEnsureNotFoundAsync(route);

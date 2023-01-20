@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Net.Advanced.Core.ProjectAggregate;
+﻿using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
 using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Net.Advanced.Web.Controllers;
 
@@ -33,7 +33,7 @@ public class ProjectController : Controller
       Name = project.Name,
       Items = project.Items
                     .Select(item => ToDoItemViewModel.FromToDoItem(item))
-                    .ToList(),
+                    .ToList()
     };
     return View(dto);
   }

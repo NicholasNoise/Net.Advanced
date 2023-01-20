@@ -1,4 +1,5 @@
-﻿using Net.Advanced.Core.CatalogAggregate;
+﻿using Microsoft.EntityFrameworkCore;
+using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.Core.ProjectAggregate;
 using Xunit;
 
@@ -6,7 +7,6 @@ namespace Net.Advanced.IntegrationTests.Data;
 
 public class EfRepositoryAdd : BaseEfRepoTestFixture
 {
-  /// <inheritdoc/>
   protected override string DbName { get; } = nameof(EfRepositoryAdd);
 
   [Fact]

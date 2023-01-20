@@ -19,7 +19,7 @@ public class ToDoItemDTO
       Id = item.Id,
       Title = item.Title,
       Description = item.Description,
-      IsDone = item.IsDone,
+      IsDone = item.IsDone
     };
   }
 }

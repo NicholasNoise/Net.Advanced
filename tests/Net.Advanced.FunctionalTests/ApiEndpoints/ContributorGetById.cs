@@ -27,7 +27,7 @@ public class ContributorGetById : IClassFixture<CustomWebApplicationFactory<WebM
   [Fact]
   public async Task ReturnsNotFoundGivenId0()
   {
-    var route = GetContributorByIdRequest.BuildRoute(0);
+    string route = GetContributorByIdRequest.BuildRoute(0);
     _ = await _client.GetAndEnsureNotFoundAsync(route);
   }
 }

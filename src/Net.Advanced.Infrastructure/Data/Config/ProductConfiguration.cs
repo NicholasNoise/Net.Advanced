@@ -5,7 +5,6 @@ using Net.Advanced.Core.CatalogAggregate;
 namespace Net.Advanced.Infrastructure.Data.Config;
 public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
-  /// <inheritdoc/>
   public void Configure(EntityTypeBuilder<Product> builder)
   {
     builder.Property(p => p.Name)

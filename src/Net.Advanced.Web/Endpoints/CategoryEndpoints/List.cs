@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
-using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
+using Net.Advanced.Core.CatalogAggregate;
 
 namespace Net.Advanced.Web.Endpoints.CategoryEndpoints;
 
@@ -15,7 +15,6 @@ public class List : EndpointWithoutRequest<CategoryListResponse>
     _repository = repository;
   }
 
-  /// <inheritdoc/>
   public override void Configure()
   {
     Get(Route);
@@ -23,8 +22,6 @@ public class List : EndpointWithoutRequest<CategoryListResponse>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
-
-  /// <inheritdoc/>
   public override async Task HandleAsync(CancellationToken cancellationToken)
   {
     var categories = await _repository.ListAsync(cancellationToken);
@@ -32,7 +29,7 @@ public class List : EndpointWithoutRequest<CategoryListResponse>
     {
       Categories = categories
         .Select(CategoryRecord.FromCategory)
-        .ToList(),
+        .ToList()
     };
 
     await SendAsync(response, cancellation: cancellationToken);

@@ -6,18 +6,15 @@ using Net.Advanced.SharedKernel.Interfaces;
 namespace Net.Advanced.Infrastructure.Data;
 
 // inherit from Ardalis.Specification type
-public class EfRepository<T> : RepositoryBase<T>, IReadRepository<T>, IRepository<T>
-  where T : class, IAggregateRoot
+public class EfRepository<T> : RepositoryBase<T>, IReadRepository<T>, IRepository<T> where T : class, IAggregateRoot
 {
   private readonly DbContext _dbContext;
 
-  public EfRepository(AppDbContext dbContext)
-    : base(dbContext)
+  public EfRepository(AppDbContext dbContext) : base(dbContext)
   {
     _dbContext = dbContext;
   }
 
-  /// <inheritdoc/>
   public async Task<IReadOnlyList<T>> ListAsync(
     int perPage,
     int page,

@@ -1,11 +1,12 @@
-﻿using Ardalis.Result;
-using FastEndpoints;
+﻿using FastEndpoints;
+using Ardalis.Result;
 using Net.Advanced.Core.Interfaces;
 
 namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
 public class Delete : Endpoint<DeleteContributorRequest>
 {
+
   private readonly IDeleteContributorService _deleteContributorService;
 
   public Delete(IDeleteContributorService service)
@@ -13,7 +14,6 @@ public class Delete : Endpoint<DeleteContributorRequest>
     _deleteContributorService = service;
   }
 
-  /// <inheritdoc/>
   public override void Configure()
   {
     Delete(DeleteContributorRequest.Route);
@@ -21,8 +21,6 @@ public class Delete : Endpoint<DeleteContributorRequest>
     Options(x => x
       .WithTags("ContributorEndpoints"));
   }
-
-  /// <inheritdoc/>
   public override async Task HandleAsync(
     DeleteContributorRequest request,
     CancellationToken cancellationToken)

@@ -13,7 +13,6 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
     _repository = repository;
   }
 
-  /// <inheritdoc/>
   public override void Configure()
   {
     Put(CreateCategoryRequest.Route);
@@ -21,8 +20,6 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
-
-  /// <inheritdoc/>
   public override async Task HandleAsync(
     UpdateCategoryRequest request,
     CancellationToken cancellationToken)

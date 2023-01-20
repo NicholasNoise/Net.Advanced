@@ -1,4 +1,6 @@
-﻿namespace Net.Advanced.Core.Interfaces;
+﻿using System.Threading.Tasks;
+
+namespace Net.Advanced.Core.Interfaces;
 
 public interface IEmailSender
 {

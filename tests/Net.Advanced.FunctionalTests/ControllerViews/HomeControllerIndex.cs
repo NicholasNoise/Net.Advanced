@@ -16,9 +16,9 @@ public class HomeControllerIndex : IClassFixture<CustomWebApplicationFactory<Web
   [Fact]
   public async Task ReturnsViewWithCorrectMessage()
   {
-    var response = await _client.GetAsync("/");
+    HttpResponseMessage response = await _client.GetAsync("/");
     response.EnsureSuccessStatusCode();
-    var stringResponse = await response.Content.ReadAsStringAsync();
+    string stringResponse = await response.Content.ReadAsStringAsync();
 
     Assert.Contains("Net.Advanced.Web", stringResponse);
   }

@@ -6,7 +6,6 @@ namespace Net.Advanced.Core;
 
 public class DefaultCoreModule : Module
 {
-  /// <inheritdoc/>
   protected override void Load(ContainerBuilder builder)
   {
     builder.RegisterType<ToDoItemSearchService>()

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Net.Advanced.Core.CatalogAggregate;
-using Net.Advanced.Core.ContributorAggregate;
+﻿using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Net.Advanced.Core.CatalogAggregate;
 
 namespace Net.Advanced.Web;
 
@@ -10,25 +10,25 @@ public static class SeedData
 {
   public static readonly Category Category1 = new Category("Hardware");
   public static readonly Category Category2 = new Category("CPU");
-  public static readonly Contributor Contributor1 = new("Ardalis");
-  public static readonly Contributor Contributor2 = new("Snowfrog");
+  public static readonly Contributor Contributor1 = new ("Ardalis");
+  public static readonly Contributor Contributor2 = new ("Snowfrog");
   public static readonly Product Product1 = new Product("Test product", 1m, 1) { Category = Category2 };
   public static readonly Product Product2 = new Product("Other test product", 2m, 2) { Category = Category2 };
   public static readonly Project TestProject1 = new Project("Test Project", PriorityStatus.Backlog);
   public static readonly ToDoItem ToDoItem1 = new ToDoItem
   {
     Title = "Get Sample Working",
-    Description = "Try to get the sample to build.",
+    Description = "Try to get the sample to build."
   };
   public static readonly ToDoItem ToDoItem2 = new ToDoItem
   {
     Title = "Review Solution",
-    Description = "Review the different projects in the solution and how they relate to one another.",
+    Description = "Review the different projects in the solution and how they relate to one another."
   };
   public static readonly ToDoItem ToDoItem3 = new ToDoItem
   {
     Title = "Run and Review Tests",
-    Description = "Make sure all the tests run and review what they are doing.",
+    Description = "Make sure all the tests run and review what they are doing."
   };
 
   public static void Initialize(IServiceProvider serviceProvider)
@@ -43,21 +43,20 @@ public static class SeedData
       }
 
       PopulateTestData(dbContext);
+
+
     }
   }
-
   public static void PopulateTestData(AppDbContext dbContext)
   {
     foreach (var item in dbContext.Projects)
     {
       dbContext.Remove(item);
     }
-
     foreach (var item in dbContext.ToDoItems)
     {
       dbContext.Remove(item);
     }
-
     foreach (var item in dbContext.Contributors)
     {
       dbContext.Remove(item);
@@ -72,7 +71,6 @@ public static class SeedData
     {
       dbContext.Remove(item);
     }
-
     dbContext.SaveChanges();
 
     dbContext.Categories.Add(Category1);

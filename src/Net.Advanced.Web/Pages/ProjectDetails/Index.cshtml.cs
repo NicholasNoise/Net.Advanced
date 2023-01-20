@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Net.Advanced.Core.ProjectAggregate;
+﻿using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
 using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Web.ApiModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Net.Advanced.Web.Pages.ProjectDetails;
 
@@ -14,7 +14,7 @@ public class IndexModel : PageModel
   [BindProperty(SupportsGet = true)]
   public int ProjectId { get; set; }
 
-  public string Message { get; set; } = string.Empty;
+  public string Message { get; set; } = "";
 
   public ProjectDTO? Project { get; set; }
 
@@ -34,11 +34,13 @@ public class IndexModel : PageModel
       return;
     }
 
-    Project = new ProjectDTO(
+    Project = new ProjectDTO
+    (
         id: project.Id,
         name: project.Name,
         items: project.Items
         .Select(item => ToDoItemDTO.FromToDoItem(item))
-        .ToList());
+        .ToList()
+    );
   }
 }

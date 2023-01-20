@@ -5,8 +5,8 @@ namespace Net.Advanced.UnitTests.Core.ProjectAggregate;
 
 public class ProjectConstructor
 {
-  private readonly string _testName = "test name";
-  private readonly PriorityStatus _testPriority = PriorityStatus.Backlog;
+  private string _testName = "test name";
+  private PriorityStatus _testPriority = PriorityStatus.Backlog;
   private Project? _testProject;
 
   private Project CreateProject()

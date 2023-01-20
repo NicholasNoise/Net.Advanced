@@ -1,14 +1,14 @@
 ﻿using Ardalis.ListStartupServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using FastEndpoints;
-using FastEndpoints.ApiExplorer;
-using FastEndpoints.Swagger.Swashbuckle;
-using Microsoft.OpenApi.Models;
 using Net.Advanced.Core;
 using Net.Advanced.Infrastructure;
 using Net.Advanced.Infrastructure.Data;
 using Net.Advanced.Web;
+using FastEndpoints;
+using FastEndpoints.Swagger.Swashbuckle;
+using FastEndpoints.ApiExplorer;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +23,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
   options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
-var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
+string? connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
 
 builder.Services.AddDbContext(connectionString!);
 
@@ -47,6 +47,7 @@ builder.Services.Configure<ServiceConfig>(config =>
   config.Path = "/listservices";
 });
 
+
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
   containerBuilder.RegisterModule(new DefaultCoreModule());
@@ -67,7 +68,6 @@ else
   app.UseExceptionHandler("/Home/Error");
   app.UseHsts();
 }
-
 app.UseRouting();
 app.UseFastEndpoints();
 

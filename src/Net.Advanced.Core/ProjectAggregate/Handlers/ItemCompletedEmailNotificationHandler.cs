@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
-using MediatR;
 using Net.Advanced.Core.Interfaces;
 using Net.Advanced.Core.ProjectAggregate.Events;
+using MediatR;
 
 namespace Net.Advanced.Core.ProjectAggregate.Handlers;
 
@@ -15,11 +15,8 @@ public class ItemCompletedEmailNotificationHandler : INotificationHandler<ToDoIt
     _emailSender = emailSender;
   }
 
-  /// <remarks>
-  /// configure a test email server to demo this works
-  /// https://ardalis.com/configuring-a-local-test-email-server
-  /// </remarks>
-  /// <inheritdoc/>
+  // configure a test email server to demo this works
+  // https://ardalis.com/configuring-a-local-test-email-server
   public Task Handle(ToDoItemCompletedEvent domainEvent, CancellationToken cancellationToken)
   {
     Guard.Against.Null(domainEvent, nameof(domainEvent));

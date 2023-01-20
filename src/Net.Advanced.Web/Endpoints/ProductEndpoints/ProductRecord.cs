@@ -21,4 +21,4 @@ public record ProductRecord(int Id, string Name, string? Description, string? Im
       product.Amount,
       CategoryRecord.FromCategory(product.Category));
   }
-}
+};

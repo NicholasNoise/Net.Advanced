@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
-using Microsoft.EntityFrameworkCore;
-using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.SharedKernel;
 using Net.Advanced.SharedKernel.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Net.Advanced.Core.CatalogAggregate;
 
 namespace Net.Advanced.Infrastructure.Data;
 
@@ -12,8 +12,7 @@ public class AppDbContext : DbContext
 {
   private readonly IDomainEventDispatcher? _dispatcher;
 
-  public AppDbContext(
-    DbContextOptions<AppDbContext> options,
+  public AppDbContext(DbContextOptions<AppDbContext> options,
     IDomainEventDispatcher? dispatcher)
       : base(options)
   {
@@ -26,23 +25,18 @@ public class AppDbContext : DbContext
   public DbSet<Category> Categories => Set<Category>();
   public DbSet<Product> Products => Set<Product>();
 
-  /// <inheritdoc/>
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
     modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
   }
 
-  /// <inheritdoc/>
-  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
   {
-    var result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    int result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
     // ignore events if no dispatcher provided
-    if (_dispatcher == null)
-    {
-      return result;
-    }
+    if (_dispatcher == null) return result;
 
     // dispatch events only if save was successful
     var entitiesWithEvents = ChangeTracker.Entries<EntityBase>()
@@ -55,7 +49,6 @@ public class AppDbContext : DbContext
     return result;
   }
 
-  /// <inheritdoc/>
   public override int SaveChanges()
   {
     return SaveChangesAsync().GetAwaiter().GetResult();

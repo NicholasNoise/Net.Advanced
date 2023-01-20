@@ -5,7 +5,7 @@ namespace Net.Advanced.UnitTests.Core.ProjectAggregate;
 
 public class Project_AddItem
 {
-  private readonly Project _testProject = new Project("some name", PriorityStatus.Backlog);
+  private Project _testProject = new Project("some name", PriorityStatus.Backlog);
 
   [Fact]
   public void AddsItemToItems()
@@ -13,7 +13,7 @@ public class Project_AddItem
     var _testItem = new ToDoItem
     {
       Title = "title",
-      Description = "description",
+      Description = "description"
     };
 
     _testProject.AddItem(_testItem);

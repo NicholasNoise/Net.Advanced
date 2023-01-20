@@ -1,4 +1,5 @@
-﻿namespace Net.Advanced.Web.Endpoints.ProjectEndpoints;
+﻿
+namespace Net.Advanced.Web.Endpoints.ProjectEndpoints;
 
 public class GetProjectByIdRequest
 {

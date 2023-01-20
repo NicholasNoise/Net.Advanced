@@ -1,7 +1,7 @@
-﻿using FastEndpoints;
-using Net.Advanced.Core.ContributorAggregate;
+﻿using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.Core.ContributorAggregate.Specifications;
 using Net.Advanced.SharedKernel.Interfaces;
+using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
@@ -14,7 +14,6 @@ public class GetById : Endpoint<GetContributorByIdRequest, ContributorRecord>
     _repository = repository;
   }
 
-  /// <inheritdoc/>
   public override void Configure()
   {
     Get(GetContributorByIdRequest.Route);
@@ -22,10 +21,7 @@ public class GetById : Endpoint<GetContributorByIdRequest, ContributorRecord>
     Options(x => x
       .WithTags("ContributorEndpoints"));
   }
-
-  /// <inheritdoc/>
-  public override async Task HandleAsync(
-    GetContributorByIdRequest request,
+  public override async Task HandleAsync(GetContributorByIdRequest request, 
     CancellationToken cancellationToken)
   {
     var spec = new ContributorByIdSpec(request.ContributorId);

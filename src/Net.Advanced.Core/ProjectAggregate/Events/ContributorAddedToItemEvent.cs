@@ -1,4 +1,5 @@
-﻿using Net.Advanced.SharedKernel;
+﻿using Net.Advanced.Core.ContributorAggregate;
+using Net.Advanced.SharedKernel;
 
 namespace Net.Advanced.Core.ProjectAggregate.Events;
 

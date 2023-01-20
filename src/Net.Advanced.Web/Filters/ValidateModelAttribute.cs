@@ -10,7 +10,6 @@ namespace Net.Advanced.Web.Filters;
 /// </summary>
 public class ValidateModelAttribute : ActionFilterAttribute
 {
-  /// <inheritdoc/>
   public override void OnActionExecuting(ActionExecutingContext context)
   {
     if (!context.ModelState.IsValid)

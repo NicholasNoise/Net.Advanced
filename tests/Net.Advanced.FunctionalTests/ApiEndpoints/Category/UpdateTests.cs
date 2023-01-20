@@ -1,9 +1,10 @@
-﻿using System.Text;
-using Ardalis.HttpClientTestExtensions;
+﻿using Ardalis.HttpClientTestExtensions;
+using System.Net;
 using Net.Advanced.Web;
 using Net.Advanced.Web.Endpoints.CategoryEndpoints;
-using Newtonsoft.Json;
 using Xunit;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Net.Advanced.FunctionalTests.ApiEndpoints.Category;
 

@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Net.Advanced.SharedKernel.Interfaces;
+﻿using Net.Advanced.SharedKernel.Interfaces;
+using MediatR;
 
 namespace Net.Advanced.SharedKernel;
 
@@ -12,7 +12,6 @@ public class DomainEventDispatcher : IDomainEventDispatcher
     _mediator = mediator;
   }
 
-  /// <inheritdoc/>
   public async Task DispatchAndClearEvents(IEnumerable<EntityBase> entitiesWithEvents)
   {
     foreach (var entity in entitiesWithEvents)

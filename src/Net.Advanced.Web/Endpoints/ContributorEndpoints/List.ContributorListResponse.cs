@@ -1,4 +1,4 @@
-﻿namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
+namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
 public class ContributorListResponse
 {

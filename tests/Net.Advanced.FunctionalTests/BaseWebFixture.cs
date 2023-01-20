@@ -11,7 +11,6 @@ public abstract class BaseWebFixture : IClassFixture<CustomWebApplicationFactory
 
   protected HttpClient Client { get; }
 
-  /// <inheritdoc/>
   public void Dispose()
   {
     Dispose(true);
