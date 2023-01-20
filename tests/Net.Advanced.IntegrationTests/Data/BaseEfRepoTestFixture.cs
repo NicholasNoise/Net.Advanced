@@ -8,17 +8,17 @@ namespace Net.Advanced.IntegrationTests.Data;
 
 public abstract class BaseEfRepoTestFixture
 {
-  protected AppDbContext _dbContext;
-
   protected BaseEfRepoTestFixture()
   {
     var options = CreateNewContextOptions();
     var mockEventDispatcher = new Mock<IDomainEventDispatcher>();
 
-    _dbContext = new AppDbContext(options, mockEventDispatcher.Object);
-    _dbContext.Database.EnsureDeleted();
-    _dbContext.Database.EnsureCreated();
+    DbContext = new AppDbContext(options, mockEventDispatcher.Object);
+    DbContext.Database.EnsureDeleted();
+    DbContext.Database.EnsureCreated();
   }
+
+  protected AppDbContext DbContext { get; }
 
   protected abstract string DbName { get; }
 
@@ -45,6 +45,6 @@ public abstract class BaseEfRepoTestFixture
   protected EfRepository<T> GetRepository<T>()
     where T : class, IAggregateRoot
   {
-    return new EfRepository<T>(_dbContext);
+    return new EfRepository<T>(DbContext);
   }
 }

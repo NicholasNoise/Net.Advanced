@@ -16,7 +16,7 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
   /// Overriding CreateHost to avoid creating a separate ServiceProvider per this thread:
   /// https://github.com/dotnet-architecture/eShopOnWeb/issues/465
   /// </summary>
-  /// <param name="builder"></param>
+  /// <param name="builder">A program initialization abstraction.</param>
   /// <returns></returns>
   protected override IHost CreateHost(IHostBuilder builder)
   {
@@ -51,8 +51,10 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
       }
       catch (Exception ex)
       {
-        logger.LogError(ex, "An error occurred seeding the " +
-                            "database with test messages. Error: {exceptionMessage}", ex.Message);
+        logger.LogError(
+          ex,
+          "An error occurred seeding the database with test messages. Error: {exceptionMessage}",
+          ex.Message);
       }
     }
 
