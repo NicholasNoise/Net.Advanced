@@ -1,5 +1,4 @@
 ﻿using Ardalis.Specification;
-using Net.Advanced.Core.ProjectAggregate;
 
 namespace Net.Advanced.Core.ProjectAggregate.Specifications;
 

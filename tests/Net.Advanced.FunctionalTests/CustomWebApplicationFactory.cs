@@ -1,20 +1,16 @@
-﻿using Net.Advanced.Core.Interfaces;
-using Net.Advanced.Infrastructure;
-using Net.Advanced.Infrastructure.Data;
-using Net.Advanced.UnitTests;
-using Net.Advanced.Web;
-using MediatR;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Net.Advanced.Infrastructure.Data;
+using Net.Advanced.Web;
 
 namespace Net.Advanced.FunctionalTests;
 
-public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
+public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
+  where TStartup : class
 {
   /// <summary>
   /// Overriding CreateHost to avoid creating a separate ServiceProvider per this thread:
@@ -79,7 +75,7 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
           }
 
           // This should be set for each individual test run
-          string inMemoryCollectionName = Guid.NewGuid().ToString();
+          var inMemoryCollectionName = Guid.NewGuid().ToString();
 
           // Add ApplicationDbContext using an in-memory database for testing.
           services.AddDbContext<AppDbContext>(options =>

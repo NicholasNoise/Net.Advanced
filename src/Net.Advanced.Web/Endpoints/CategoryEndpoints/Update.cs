@@ -20,6 +20,7 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
+
   public override async Task HandleAsync(
     UpdateCategoryRequest request,
     CancellationToken cancellationToken)

@@ -6,5 +6,6 @@ public class UpdateContributorResponse
   {
     Contributor = contributor;
   }
+
   public ContributorRecord Contributor { get; set; }
 }

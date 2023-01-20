@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.ContributorAggregate;
+﻿using FastEndpoints;
+using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
@@ -20,6 +20,7 @@ public class Create : Endpoint<CreateContributorRequest, CreateContributorRespon
     Options(x => x
       .WithTags("ContributorEndpoints"));
   }
+
   public override async Task HandleAsync(
     CreateContributorRequest request,
     CancellationToken cancellationToken)
@@ -31,11 +32,9 @@ public class Create : Endpoint<CreateContributorRequest, CreateContributorRespon
 
     var newContributor = new Contributor(request.Name);
     var createdItem = await _repository.AddAsync(newContributor, cancellationToken);
-    var response = new CreateContributorResponse
-    (
+    var response = new CreateContributorResponse(
       id: createdItem.Id,
-      name: createdItem.Name
-    );
+      name: createdItem.Name);
 
     await SendAsync(response);
   }

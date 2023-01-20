@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
-using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.Core.CatalogAggregate.Specifications;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Web.Endpoints.CategoryEndpoints;
 
@@ -21,8 +21,9 @@ public class GetById : Endpoint<GetCategoryByIdRequest, CategoryRecord>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
+
   public override async Task HandleAsync(
-    GetCategoryByIdRequest request, 
+    GetCategoryByIdRequest request,
     CancellationToken cancellationToken)
   {
     var spec = new CategoryByIdSpec(request.CategoryId);

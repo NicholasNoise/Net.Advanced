@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Net.Advanced.Infrastructure.Data;
 
 namespace Net.Advanced.Infrastructure;
 

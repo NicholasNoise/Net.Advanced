@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.ContributorAggregate;
+﻿using FastEndpoints;
+using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
@@ -20,6 +20,7 @@ public class List : EndpointWithoutRequest<ContributorListResponse>
     Options(x => x
       .WithTags("ContributorEndpoints"));
   }
+
   public override async Task HandleAsync(CancellationToken cancellationToken)
   {
     var contributors = await _repository.ListAsync(cancellationToken);
@@ -27,7 +28,7 @@ public class List : EndpointWithoutRequest<ContributorListResponse>
     {
       Contributors = contributors
         .Select(project => new ContributorRecord(project.Id, project.Name))
-        .ToList()
+        .ToList(),
     };
 
     await SendAsync(response);

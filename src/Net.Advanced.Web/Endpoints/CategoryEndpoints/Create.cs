@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.CatalogAggregate;
+﻿using FastEndpoints;
+using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.CategoryEndpoints;
 
@@ -20,6 +20,7 @@ public class Create : Endpoint<CreateCategoryRequest, CategoryRecord>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
+
   public override async Task HandleAsync(
     CreateCategoryRequest request,
     CancellationToken cancellationToken)
@@ -41,6 +42,7 @@ public class Create : Endpoint<CreateCategoryRequest, CategoryRecord>
 
       newCategory.UpdateParent(parentCategory);
     }
+
     var createdItem = await _repository.AddAsync(newCategory, cancellationToken);
     var response = CategoryRecord.FromCategory(createdItem);
 

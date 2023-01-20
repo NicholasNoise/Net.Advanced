@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.ContributorAggregate;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Net.Advanced.Core.ContributorAggregate;
 
 namespace Net.Advanced.Infrastructure.Data.Config;
 

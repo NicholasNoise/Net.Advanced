@@ -21,7 +21,8 @@ public class EfRepositoryDelete : BaseEfRepoTestFixture
     await repository.DeleteAsync(project);
 
     // verify it's no longer there
-    Assert.DoesNotContain(await repository.ListAsync(),
+    Assert.DoesNotContain(
+      await repository.ListAsync(),
         p => p.Name == initialName);
   }
 
@@ -38,7 +39,8 @@ public class EfRepositoryDelete : BaseEfRepoTestFixture
     await repository.DeleteAsync(category);
 
     // Assert.
-    Assert.DoesNotContain(await repository.ListAsync(),
+    Assert.DoesNotContain(
+      await repository.ListAsync(),
       c => c.Name == initialName);
   }
 
@@ -57,7 +59,8 @@ public class EfRepositoryDelete : BaseEfRepoTestFixture
     await repository.DeleteAsync(product);
 
     // Assert.
-    Assert.DoesNotContain(await repository.ListAsync(),
+    Assert.DoesNotContain(
+      await repository.ListAsync(),
       c => c.Name == initialName);
   }
 }

@@ -1,7 +1,7 @@
-﻿using Net.Advanced.Core.ContributorAggregate.Events;
-using Net.Advanced.SharedKernel.Interfaces;
+﻿using MediatR;
+using Net.Advanced.Core.ContributorAggregate.Events;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
-using MediatR;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Core.ProjectAggregate.Handlers;
 

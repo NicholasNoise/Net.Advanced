@@ -21,7 +21,7 @@ public class ToDoItemSearchService : IToDoItemSearchService
     {
       var errors = new List<ValidationError>
       {
-        new() { Identifier = nameof(searchString), ErrorMessage = $"{nameof(searchString)} is required." }
+        new() { Identifier = nameof(searchString), ErrorMessage = $"{nameof(searchString)} is required." },
       };
 
       return Result<List<ToDoItem>>.Invalid(errors);

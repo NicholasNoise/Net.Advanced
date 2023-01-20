@@ -1,5 +1,4 @@
-﻿
-namespace Net.Advanced.SharedKernel.Interfaces;
+﻿namespace Net.Advanced.SharedKernel.Interfaces;
 
 public interface IDomainEventDispatcher
 {

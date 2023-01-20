@@ -1,8 +1,8 @@
-﻿using Net.Advanced.Core.ProjectAggregate;
+﻿using Microsoft.AspNetCore.Mvc;
+using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
 using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Web.ApiModels;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Net.Advanced.Web.Api;
 
@@ -24,11 +24,9 @@ public class ProjectsController : BaseApiController
   public async Task<IActionResult> List()
   {
     var projectDTOs = (await _repository.ListAsync())
-        .Select(project => new ProjectDTO
-        (
+        .Select(project => new ProjectDTO(
             id: project.Id,
-            name: project.Name
-        ))
+            name: project.Name))
         .ToList();
 
     return Ok(projectDTOs);
@@ -45,15 +43,11 @@ public class ProjectsController : BaseApiController
       return NotFound();
     }
 
-    var result = new ProjectDTO
-    (
+    var result = new ProjectDTO(
         id: project.Id,
         name: project.Name,
-        items: new List<ToDoItemDTO>
-        (
-            project.Items.Select(i => ToDoItemDTO.FromToDoItem(i)).ToList()
-        )
-    );
+        items: new List<ToDoItemDTO>(
+            project.Items.Select(i => ToDoItemDTO.FromToDoItem(i)).ToList()));
 
     return Ok(result);
   }
@@ -66,11 +60,9 @@ public class ProjectsController : BaseApiController
 
     var createdProject = await _repository.AddAsync(newProject);
 
-    var result = new ProjectDTO
-    (
+    var result = new ProjectDTO(
         id: createdProject.Id,
-        name: createdProject.Name
-    );
+        name: createdProject.Name);
     return Ok(result);
   }
 
@@ -80,10 +72,16 @@ public class ProjectsController : BaseApiController
   {
     var projectSpec = new ProjectByIdWithItemsSpec(projectId);
     var project = await _repository.FirstOrDefaultAsync(projectSpec);
-    if (project == null) return NotFound("No such project");
+    if (project == null)
+    {
+      return NotFound("No such project");
+    }
 
     var toDoItem = project.Items.FirstOrDefault(item => item.Id == itemId);
-    if (toDoItem == null) return NotFound("No such item.");
+    if (toDoItem == null)
+    {
+      return NotFound("No such item.");
+    }
 
     toDoItem.MarkComplete();
     await _repository.UpdateAsync(project);

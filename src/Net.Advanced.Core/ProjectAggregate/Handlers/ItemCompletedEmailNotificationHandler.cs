@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
+using MediatR;
 using Net.Advanced.Core.Interfaces;
 using Net.Advanced.Core.ProjectAggregate.Events;
-using MediatR;
 
 namespace Net.Advanced.Core.ProjectAggregate.Handlers;
 

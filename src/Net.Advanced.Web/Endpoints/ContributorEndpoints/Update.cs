@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.ContributorAggregate;
+﻿using FastEndpoints;
+using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.ContributorEndpoints;
 
@@ -20,6 +20,7 @@ public class Update : Endpoint<UpdateContributorRequest, UpdateContributorRespon
     Options(x => x
       .WithTags("ContributorEndpoints"));
   }
+
   public override async Task HandleAsync(
     UpdateContributorRequest request,
     CancellationToken cancellationToken)
@@ -41,8 +42,7 @@ public class Update : Endpoint<UpdateContributorRequest, UpdateContributorRespon
     await _repository.UpdateAsync(existingContributor, cancellationToken);
 
     var response = new UpdateContributorResponse(
-        contributor: new ContributorRecord(existingContributor.Id, existingContributor.Name)
-    );
+        contributor: new ContributorRecord(existingContributor.Id, existingContributor.Name));
 
     await SendAsync(response);
   }

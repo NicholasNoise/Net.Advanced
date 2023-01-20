@@ -1,8 +1,8 @@
-﻿using Net.Advanced.Infrastructure.Data;
-using Net.Advanced.SharedKernel.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using Net.Advanced.Infrastructure.Data;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.IntegrationTests.Data;
 
@@ -42,7 +42,8 @@ public abstract class BaseEfRepoTestFixture
     return builder.Options;
   }
 
-  protected EfRepository<T> GetRepository<T>() where T : class, IAggregateRoot
+  protected EfRepository<T> GetRepository<T>()
+    where T : class, IAggregateRoot
   {
     return new EfRepository<T>(_dbContext);
   }

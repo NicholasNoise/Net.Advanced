@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Net.Advanced.Web.ViewModels;
+﻿namespace Net.Advanced.Web.ViewModels;
 
 public class ProjectViewModel
 {

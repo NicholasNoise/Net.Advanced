@@ -23,6 +23,7 @@ public class Update : Endpoint<UpdateProductRequest, ProductRecord>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
+
   public override async Task HandleAsync(
     UpdateProductRequest request,
     CancellationToken cancellationToken)

@@ -1,8 +1,8 @@
-﻿using Net.Advanced.Core.ProjectAggregate;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
 using Net.Advanced.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Net.Advanced.Web.Pages.ProjectDetails;
 

@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
-using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Core.CatalogAggregate;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Web.Endpoints.ProductEndpoints;
 
@@ -35,7 +35,7 @@ public class List : Endpoint<ProductListRequest, ProductListResponse>
     {
       Products = products
         .Select(ProductRecord.FromProduct)
-        .ToList()
+        .ToList(),
     };
 
     await SendAsync(response, cancellation: cancellationToken);
