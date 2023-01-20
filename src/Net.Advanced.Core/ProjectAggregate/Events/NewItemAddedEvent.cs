@@ -9,7 +9,7 @@ public class NewItemAddedEvent : DomainEventBase
 
   public NewItemAddedEvent(
     Project project,
-      ToDoItem newItem)
+    ToDoItem newItem)
   {
     Project = project;
     NewItem = newItem;

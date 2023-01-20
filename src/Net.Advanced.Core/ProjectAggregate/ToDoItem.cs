@@ -27,7 +27,7 @@ public class ToDoItem : EntityBase
     ContributorId = contributorId;
 
     var contributorAddedToItem = new ContributorAddedToItemEvent(this, contributorId);
-    this.RegisterDomainEvent(contributorAddedToItem);
+    RegisterDomainEvent(contributorAddedToItem);
   }
 
   public void RemoveContributor()

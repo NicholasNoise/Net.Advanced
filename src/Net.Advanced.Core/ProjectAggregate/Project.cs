@@ -27,7 +27,7 @@ public class Project : EntityBase, IAggregateRoot
     _items.Add(newItem);
 
     var newItemAddedEvent = new NewItemAddedEvent(this, newItem);
-    this.RegisterDomainEvent(newItemAddedEvent);
+    RegisterDomainEvent(newItemAddedEvent);
   }
 
   public void UpdateName(string newName)
