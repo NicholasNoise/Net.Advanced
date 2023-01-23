@@ -21,16 +21,16 @@ public class List : EndpointWithoutRequest<ContributorListResponse>
       .WithTags("ContributorEndpoints"));
   }
 
-  public override async Task HandleAsync(CancellationToken cancellationToken)
+  public override async Task HandleAsync(CancellationToken ct)
   {
-    var contributors = await _repository.ListAsync(cancellationToken);
-    var response = new ContributorListResponse()
+    var contributors = await _repository.ListAsync(ct);
+    var response = new ContributorListResponse
     {
       Contributors = contributors
         .Select(project => new ContributorRecord(project.Id, project.Name))
         .ToList(),
     };
 
-    await SendAsync(response);
+    await SendAsync(response, cancellation: ct);
   }
 }

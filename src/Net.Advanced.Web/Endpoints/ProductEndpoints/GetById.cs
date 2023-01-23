@@ -23,17 +23,17 @@ public class GetById : Endpoint<GetProductByIdRequest, ProductRecord>
 
   public override async Task HandleAsync(
     GetProductByIdRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
-    var entity = await _repository.GetByIdAsync(request.ProductId, cancellationToken);
+    var entity = await _repository.GetByIdAsync(request.ProductId, ct);
     if (entity == null)
     {
-      await SendNotFoundAsync(cancellationToken);
+      await SendNotFoundAsync(ct);
       return;
     }
 
     var response = ProductRecord.FromProduct(entity);
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

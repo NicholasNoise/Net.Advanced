@@ -24,18 +24,18 @@ public class GetById : Endpoint<GetCategoryByIdRequest, CategoryRecord>
 
   public override async Task HandleAsync(
     GetCategoryByIdRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     var spec = new CategoryByIdSpec(request.CategoryId);
-    var entity = await _repository.FirstOrDefaultAsync(spec, cancellationToken);
+    var entity = await _repository.FirstOrDefaultAsync(spec, ct);
     if (entity == null)
     {
-      await SendNotFoundAsync(cancellationToken);
+      await SendNotFoundAsync(ct);
       return;
     }
 
     var response = CategoryRecord.FromCategory(entity);
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

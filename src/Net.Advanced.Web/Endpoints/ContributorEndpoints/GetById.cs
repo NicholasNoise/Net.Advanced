@@ -24,18 +24,18 @@ public class GetById : Endpoint<GetContributorByIdRequest, ContributorRecord>
 
   public override async Task HandleAsync(
     GetContributorByIdRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     var spec = new ContributorByIdSpec(request.ContributorId);
-    var entity = await _repository.FirstOrDefaultAsync(spec, cancellationToken);
+    var entity = await _repository.FirstOrDefaultAsync(spec, ct);
     if (entity == null)
     {
-      await SendNotFoundAsync();
+      await SendNotFoundAsync(ct);
       return;
     }
 
     var response = new ContributorRecord(entity.Id, entity.Name);
 
-    await SendAsync(response);
+    await SendAsync(response, cancellation: ct);
   }
 }

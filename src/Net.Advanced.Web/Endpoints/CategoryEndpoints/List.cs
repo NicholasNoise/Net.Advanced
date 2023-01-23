@@ -23,9 +23,9 @@ public class List : EndpointWithoutRequest<CategoryListResponse>
       .WithTags("CategoryEndpoints"));
   }
 
-  public override async Task HandleAsync(CancellationToken cancellationToken)
+  public override async Task HandleAsync(CancellationToken ct)
   {
-    var categories = await _repository.ListAsync(cancellationToken);
+    var categories = await _repository.ListAsync(ct);
     var response = new CategoryListResponse
     {
       Categories = categories
@@ -33,6 +33,6 @@ public class List : EndpointWithoutRequest<CategoryListResponse>
         .ToList(),
     };
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

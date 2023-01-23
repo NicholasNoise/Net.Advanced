@@ -23,16 +23,16 @@ public class Delete : Endpoint<DeleteContributorRequest>
 
   public override async Task HandleAsync(
     DeleteContributorRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     var result = await _deleteContributorService.DeleteContributor(request.ContributorId);
 
     if (result.Status == ResultStatus.NotFound)
     {
-      await SendNotFoundAsync();
+      await SendNotFoundAsync(ct);
       return;
     }
 
-    await SendNoContentAsync();
+    await SendNoContentAsync(ct);
   }
 }

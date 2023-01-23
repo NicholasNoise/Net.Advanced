@@ -1,4 +1,5 @@
-﻿using Ardalis.HttpClientTestExtensions;
+﻿using System.Net;
+using Ardalis.HttpClientTestExtensions;
 using Net.Advanced.Web;
 using Net.Advanced.Web.Endpoints.ContributorEndpoints;
 using Xunit;
@@ -28,6 +29,7 @@ public class ContributorGetById : IClassFixture<CustomWebApplicationFactory<WebM
   public async Task ReturnsNotFoundGivenId0()
   {
     var route = GetContributorByIdRequest.BuildRoute(0);
-    _ = await _client.GetAndEnsureNotFoundAsync(route);
+    var response = await _client.GetAsync(route);
+    Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
   }
 }

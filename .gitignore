@@ -8,6 +8,7 @@
 *.sln.docstates
 *.svclog
 .vs/
+.sonarqube/
 .vscode/settings.json
 
 # Build results

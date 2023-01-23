@@ -23,7 +23,7 @@ public class Create : Endpoint<CreateContributorRequest, CreateContributorRespon
 
   public override async Task HandleAsync(
     CreateContributorRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     if (request.Name == null)
     {
@@ -31,11 +31,11 @@ public class Create : Endpoint<CreateContributorRequest, CreateContributorRespon
     }
 
     var newContributor = new Contributor(request.Name);
-    var createdItem = await _repository.AddAsync(newContributor, cancellationToken);
+    var createdItem = await _repository.AddAsync(newContributor, ct);
     var response = new CreateContributorResponse(
       id: createdItem.Id,
       name: createdItem.Name);
 
-    await SendAsync(response);
+    await SendAsync(response, cancellation: ct);
   }
 }

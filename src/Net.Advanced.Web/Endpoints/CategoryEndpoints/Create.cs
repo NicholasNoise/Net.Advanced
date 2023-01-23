@@ -23,7 +23,7 @@ public class Create : Endpoint<CreateCategoryRequest, CategoryRecord>
 
   public override async Task HandleAsync(
     CreateCategoryRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     if (request.Name is null)
     {
@@ -34,7 +34,7 @@ public class Create : Endpoint<CreateCategoryRequest, CategoryRecord>
     newCategory.UpdateImage(request.Image);
     if (request.ParentId is not null)
     {
-      var parentCategory = await _repository.GetByIdAsync(request.ParentId.Value, cancellationToken);
+      var parentCategory = await _repository.GetByIdAsync(request.ParentId.Value, ct);
       if (parentCategory is null)
       {
         ThrowError("Parent was not found");
@@ -43,9 +43,9 @@ public class Create : Endpoint<CreateCategoryRequest, CategoryRecord>
       newCategory.UpdateParent(parentCategory);
     }
 
-    var createdItem = await _repository.AddAsync(newCategory, cancellationToken);
+    var createdItem = await _repository.AddAsync(newCategory, ct);
     var response = CategoryRecord.FromCategory(createdItem);
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

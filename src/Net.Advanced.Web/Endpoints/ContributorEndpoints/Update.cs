@@ -23,27 +23,27 @@ public class Update : Endpoint<UpdateContributorRequest, UpdateContributorRespon
 
   public override async Task HandleAsync(
     UpdateContributorRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     if (request.Name == null)
     {
       ThrowError("Name is required");
     }
 
-    var existingContributor = await _repository.GetByIdAsync(request.Id, cancellationToken);
+    var existingContributor = await _repository.GetByIdAsync(request.Id, ct);
     if (existingContributor == null)
     {
-      await SendNotFoundAsync();
+      await SendNotFoundAsync(ct);
       return;
     }
 
     existingContributor.UpdateName(request.Name);
 
-    await _repository.UpdateAsync(existingContributor, cancellationToken);
+    await _repository.UpdateAsync(existingContributor, ct);
 
     var response = new UpdateContributorResponse(
         contributor: new ContributorRecord(existingContributor.Id, existingContributor.Name));
 
-    await SendAsync(response);
+    await SendAsync(response, cancellation: ct);
   }
 }
