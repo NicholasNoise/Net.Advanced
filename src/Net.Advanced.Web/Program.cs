@@ -9,6 +9,7 @@ using Net.Advanced.Core;
 using Net.Advanced.Infrastructure;
 using Net.Advanced.Infrastructure.Data;
 using Net.Advanced.Web;
+using RabbitMQ.Client.Core.DependencyInjection;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,12 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 var connectionString = builder.Configuration.GetConnectionString("PostgresConnection");
 
 builder.Services.AddDbContext(connectionString!);
+
+var rabbitMqSection = builder.Configuration.GetSection("RabbitMq");
+var exchangeSection = builder.Configuration.GetSection("RabbitMqExchange");
+
+builder.Services.AddRabbitMqServices(rabbitMqSection)
+  .AddProductionExchange("exchange.name", exchangeSection);
 
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddRazorPages();
