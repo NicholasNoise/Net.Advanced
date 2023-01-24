@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
-using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Core.CatalogAggregate;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Web.Endpoints.ProductEndpoints;
 
@@ -27,17 +27,17 @@ public class List : Endpoint<ProductListRequest, ProductListResponse>
 
   public override async Task HandleAsync(
     ProductListRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
-    var count = await _repository.CountAsync(cancellationToken);
-    var products = await _repository.ListAsync(request.PerPage, request.Page, null, cancellationToken);
+    var count = await _repository.CountAsync(ct);
+    var products = await _repository.ListAsync(request.PerPage, request.Page, null, ct);
     var response = new ProductListResponse(count, request.Page, request.PerPage, BuildRoute)
     {
       Products = products
         .Select(ProductRecord.FromProduct)
-        .ToList()
+        .ToList(),
     };
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

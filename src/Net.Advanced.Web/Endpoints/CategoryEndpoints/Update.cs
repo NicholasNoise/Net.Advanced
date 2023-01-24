@@ -20,19 +20,20 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
+
   public override async Task HandleAsync(
     UpdateCategoryRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     if (request.Name == null)
     {
       ThrowError("Name is required");
     }
 
-    var existingCategory = await _repository.GetByIdAsync(request.Id, cancellationToken);
+    var existingCategory = await _repository.GetByIdAsync(request.Id, ct);
     if (existingCategory == null)
     {
-      await SendNotFoundAsync(cancellationToken);
+      await SendNotFoundAsync(ct);
       return;
     }
 
@@ -42,7 +43,7 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
     Category? parentCategory = null;
     if (request.ParentId is not null)
     {
-      parentCategory = await _repository.GetByIdAsync(request.ParentId.Value, cancellationToken);
+      parentCategory = await _repository.GetByIdAsync(request.ParentId.Value, ct);
       if (parentCategory is null)
       {
         ThrowError("Parent was not found");
@@ -51,10 +52,10 @@ public class Update : Endpoint<UpdateCategoryRequest, CategoryRecord>
 
     existingCategory.UpdateParent(parentCategory);
 
-    await _repository.UpdateAsync(existingCategory, cancellationToken);
+    await _repository.UpdateAsync(existingCategory, ct);
 
     var response = CategoryRecord.FromCategory(existingCategory);
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

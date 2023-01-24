@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.CatalogAggregate;
+﻿using FastEndpoints;
+using Net.Advanced.Core.CatalogAggregate;
 using Net.Advanced.SharedKernel.Interfaces;
-using FastEndpoints;
 
 namespace Net.Advanced.Web.Endpoints.ProductEndpoints;
 
@@ -23,16 +23,17 @@ public class Create : Endpoint<CreateProductRequest, ProductRecord>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
+
   public override async Task HandleAsync(
     CreateProductRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     if (request.Name is null)
     {
       ThrowError("Name is required");
     }
 
-    var category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
+    var category = await _categoryRepository.GetByIdAsync(request.CategoryId, ct);
     if (category == null)
     {
       ThrowError("Category was not found");
@@ -45,9 +46,9 @@ public class Create : Endpoint<CreateProductRequest, ProductRecord>
       Category = category,
     };
 
-    var createdItem = await _repository.AddAsync(newProduct, cancellationToken);
+    var createdItem = await _repository.AddAsync(newProduct, ct);
     var response = ProductRecord.FromProduct(createdItem);
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
-using Net.Advanced.Core.Interfaces;
 using Microsoft.Extensions.Logging;
+using Net.Advanced.Core.Interfaces;
 
 namespace Net.Advanced.Infrastructure;
 
@@ -20,7 +20,7 @@ public class SmtpEmailSender : IEmailSender
     {
       From = new MailAddress(from),
       Subject = subject,
-      Body = body
+      Body = body,
     };
     message.To.Add(new MailAddress(to));
     await emailClient.SendMailAsync(message);

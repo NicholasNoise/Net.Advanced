@@ -1,6 +1,6 @@
-﻿using Net.Advanced.Core.ProjectAggregate;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Net.Advanced.Core.CatalogAggregate;
+using Net.Advanced.Core.ProjectAggregate;
 using Xunit;
 
 namespace Net.Advanced.IntegrationTests.Data;
@@ -20,7 +20,7 @@ public class EfRepositoryUpdate : BaseEfRepoTestFixture
     await repository.AddAsync(project);
 
     // detach the item so we get a different instance
-    _dbContext.Entry(project).State = EntityState.Detached;
+    DbContext.Entry(project).State = EntityState.Detached;
 
     // fetch the item and update its title
     var newProject = (await repository.ListAsync())
@@ -54,7 +54,7 @@ public class EfRepositoryUpdate : BaseEfRepoTestFixture
     await repository.AddAsync(category);
 
     // detach the item so we get a different instance
-    _dbContext.Entry(category).State = EntityState.Detached;
+    DbContext.Entry(category).State = EntityState.Detached;
 
     // fetch the item and update its title
     var newCategory = (await repository.ListAsync())
@@ -91,7 +91,7 @@ public class EfRepositoryUpdate : BaseEfRepoTestFixture
     await repository.AddAsync(category);
 
     // detach the item so we get a different instance
-    _dbContext.Entry(category).State = EntityState.Detached;
+    DbContext.Entry(category).State = EntityState.Detached;
 
     // fetch the item and update its title
     var categories = await repository.ListAsync();
@@ -130,7 +130,7 @@ public class EfRepositoryUpdate : BaseEfRepoTestFixture
     await repository.AddAsync(product);
 
     // detach the item so we get a different instance
-    _dbContext.Entry(product).State = EntityState.Detached;
+    DbContext.Entry(product).State = EntityState.Detached;
 
     // fetch the item and update its title
     var newProduct = (await repository.ListAsync())

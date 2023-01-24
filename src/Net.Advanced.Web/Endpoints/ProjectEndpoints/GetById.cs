@@ -1,8 +1,8 @@
 ﻿using Ardalis.ApiEndpoints;
+using Microsoft.AspNetCore.Mvc;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Core.ProjectAggregate.Specifications;
 using Net.Advanced.SharedKernel.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Net.Advanced.Web.Endpoints.ProjectEndpoints;
@@ -27,7 +27,7 @@ public class GetById : EndpointBaseAsync
   ]
   public override async Task<ActionResult<GetProjectByIdResponse>> HandleAsync(
     [FromRoute] GetProjectByIdRequest request,
-    CancellationToken cancellationToken = new())
+    CancellationToken cancellationToken = default(CancellationToken))
   {
     var spec = new ProjectByIdWithItemsSpec(request.ProjectId);
     var entity = await _repository.FirstOrDefaultAsync(spec, cancellationToken);
@@ -36,13 +36,11 @@ public class GetById : EndpointBaseAsync
       return NotFound();
     }
 
-    var response = new GetProjectByIdResponse
-    (
+    var response = new GetProjectByIdResponse(
       id: entity.Id,
       name: entity.Name,
       items: entity.Items.Select(item => new ToDoItemRecord(item.Id, item.Title, item.Description, item.IsDone))
-        .ToList()
-    );
+        .ToList());
 
     return Ok(response);
   }

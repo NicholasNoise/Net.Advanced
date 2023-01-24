@@ -9,6 +9,7 @@ public class MetaController : BaseApiController
   /// A sample API Controller. Consider using API Endpoints (see Endpoints folder) for a more SOLID approach to building APIs
   /// https://github.com/ardalis/ApiEndpoints
   /// </summary>
+  /// <returns></returns>
   [HttpGet("/info")]
   public ActionResult<string> Info()
   {

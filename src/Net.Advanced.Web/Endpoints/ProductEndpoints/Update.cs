@@ -23,23 +23,24 @@ public class Update : Endpoint<UpdateProductRequest, ProductRecord>
     Options(x => x
       .WithTags("ProductEndpoints"));
   }
+
   public override async Task HandleAsync(
     UpdateProductRequest request,
-    CancellationToken cancellationToken)
+    CancellationToken ct)
   {
     if (request.Name == null)
     {
       ThrowError("Name is required");
     }
 
-    var existingProduct = await _repository.GetByIdAsync(request.Id, cancellationToken);
+    var existingProduct = await _repository.GetByIdAsync(request.Id, ct);
     if (existingProduct == null)
     {
-      await SendNotFoundAsync(cancellationToken);
+      await SendNotFoundAsync(ct);
       return;
     }
 
-    var category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
+    var category = await _categoryRepository.GetByIdAsync(request.CategoryId, ct);
     if (category is null)
     {
       ThrowError("Category was not found");
@@ -51,10 +52,10 @@ public class Update : Endpoint<UpdateProductRequest, ProductRecord>
     existingProduct.Price = request.Price;
     existingProduct.Amount = request.Amount;
 
-    await _repository.UpdateAsync(existingProduct, cancellationToken);
+    await _repository.UpdateAsync(existingProduct, ct);
 
     var response = ProductRecord.FromProduct(existingProduct);
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

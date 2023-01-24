@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
-using Net.Advanced.SharedKernel.Interfaces;
 using Net.Advanced.Core.CatalogAggregate;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.Web.Endpoints.CategoryEndpoints;
 
@@ -22,16 +22,17 @@ public class List : EndpointWithoutRequest<CategoryListResponse>
     Options(x => x
       .WithTags("CategoryEndpoints"));
   }
-  public override async Task HandleAsync(CancellationToken cancellationToken)
+
+  public override async Task HandleAsync(CancellationToken ct)
   {
-    var categories = await _repository.ListAsync(cancellationToken);
+    var categories = await _repository.ListAsync(ct);
     var response = new CategoryListResponse
     {
       Categories = categories
         .Select(CategoryRecord.FromCategory)
-        .ToList()
+        .ToList(),
     };
 
-    await SendAsync(response, cancellation: cancellationToken);
+    await SendAsync(response, cancellation: ct);
   }
 }

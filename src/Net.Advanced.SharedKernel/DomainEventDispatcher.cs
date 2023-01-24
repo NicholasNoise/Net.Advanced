@@ -1,5 +1,5 @@
-﻿using Net.Advanced.SharedKernel.Interfaces;
-using MediatR;
+﻿using MediatR;
+using Net.Advanced.SharedKernel.Interfaces;
 
 namespace Net.Advanced.SharedKernel;
 

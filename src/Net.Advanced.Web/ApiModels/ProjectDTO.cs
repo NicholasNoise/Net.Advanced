@@ -3,11 +3,13 @@
 // ApiModel DTOs are used by ApiController classes and are typically kept in a side-by-side folder
 public class ProjectDTO : CreateProjectDTO
 {
-  public ProjectDTO(int id, string name, List<ToDoItemDTO>? items = null) : base(name)
+  public ProjectDTO(int id, string name, List<ToDoItemDTO>? items = null)
+    : base(name)
   {
     Id = id;
     Items = items ?? new List<ToDoItemDTO>();
   }
+
   public int Id { get; set; }
   public List<ToDoItemDTO> Items { get; set; }
 }
@@ -19,5 +21,6 @@ public abstract class CreateProjectDTO
   {
     Name = name;
   }
+
   public string Name { get; set; }
 }

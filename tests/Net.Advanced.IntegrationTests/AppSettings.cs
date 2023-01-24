@@ -36,7 +36,6 @@ public static class AppSettings
       throw new InvalidOperationException("PostgreSQL database names are limited to 64 chars, " +
                                           $"but your database name '{builder.Database}' is {builder.Database.Length} chars. " +
                                           $"Consider shortening the name in the '{PostgreSqlConnectionString}' in your {AppSettingFilename} file or stop adding a extra name on the end");
-
     }
 
     return builder.ToString();

@@ -6,5 +6,6 @@ public class UpdateProjectResponse
   {
     Project = project;
   }
+
   public ProjectRecord Project { get; set; }
 }

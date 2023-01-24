@@ -2,7 +2,8 @@
 
 public class ProductListResponse : BaseResponseWithPagination
 {
-  public ProductListResponse() : base()
+  public ProductListResponse()
+    : base()
   {
   }
 

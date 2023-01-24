@@ -1,4 +1,5 @@
-﻿using Ardalis.HttpClientTestExtensions;
+﻿using System.Net;
+using Ardalis.HttpClientTestExtensions;
 using Net.Advanced.Web;
 using Net.Advanced.Web.Endpoints.ProductEndpoints;
 using Xunit;
@@ -17,8 +18,8 @@ public class GetByIdTests : BaseWebFixture
   public async Task ReturnsProduct()
   {
     // Arrange.
-    int productId = SeedData.Product1.Id;
-    string route = GetProductByIdRequest.BuildRoute(productId);
+    var productId = SeedData.Product1.Id;
+    var route = GetProductByIdRequest.BuildRoute(productId);
 
     // Act.
     var result = await Client.GetAndDeserializeAsync<ProductRecord>(route);
@@ -33,9 +34,10 @@ public class GetByIdTests : BaseWebFixture
   {
     // Arrange.
     const int productId = 0;
-    string route = GetProductByIdRequest.BuildRoute(productId);
+    var route = GetProductByIdRequest.BuildRoute(productId);
 
     // Assert.
-    _ = await Client.GetAndEnsureNotFoundAsync(route);
+    var response = await Client.GetAsync(route);
+    Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
   }
 }

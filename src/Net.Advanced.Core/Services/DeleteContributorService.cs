@@ -1,9 +1,9 @@
-using Ardalis.Result;
+﻿using Ardalis.Result;
+using MediatR;
 using Net.Advanced.Core.ContributorAggregate;
 using Net.Advanced.Core.ContributorAggregate.Events;
 using Net.Advanced.Core.Interfaces;
 using Net.Advanced.SharedKernel.Interfaces;
-using MediatR;
 
 namespace Net.Advanced.Core.Services;
 
@@ -21,7 +21,10 @@ public class DeleteContributorService : IDeleteContributorService
   public async Task<Result> DeleteContributor(int contributorId)
   {
     var aggregateToDelete = await _repository.GetByIdAsync(contributorId);
-    if (aggregateToDelete == null) return Result.NotFound();
+    if (aggregateToDelete == null)
+    {
+      return Result.NotFound();
+    }
 
     await _repository.DeleteAsync(aggregateToDelete);
     var domainEvent = new ContributorDeletedEvent(contributorId);

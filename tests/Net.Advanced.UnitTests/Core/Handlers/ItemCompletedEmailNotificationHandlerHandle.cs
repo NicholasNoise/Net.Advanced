@@ -1,16 +1,16 @@
-﻿using Net.Advanced.Core.Interfaces;
+﻿using Moq;
+using Net.Advanced.Core.Interfaces;
 using Net.Advanced.Core.ProjectAggregate;
 using Net.Advanced.Core.ProjectAggregate.Events;
 using Net.Advanced.Core.ProjectAggregate.Handlers;
-using Moq;
 using Xunit;
 
 namespace Net.Advanced.UnitTests.Core.Handlers;
 
 public class ItemCompletedEmailNotificationHandlerHandle
 {
-  private ItemCompletedEmailNotificationHandler _handler;
-  private Mock<IEmailSender> _emailSenderMock;
+  private readonly ItemCompletedEmailNotificationHandler _handler;
+  private readonly Mock<IEmailSender> _emailSenderMock;
 
   public ItemCompletedEmailNotificationHandlerHandle()
   {

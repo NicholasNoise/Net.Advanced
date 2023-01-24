@@ -1,4 +1,5 @@
-﻿using Ardalis.HttpClientTestExtensions;
+﻿using System.Net;
+using Ardalis.HttpClientTestExtensions;
 using Net.Advanced.Web;
 using Net.Advanced.Web.Endpoints.ProjectEndpoints;
 using Xunit;
@@ -28,7 +29,8 @@ public class ProjectGetById : IClassFixture<CustomWebApplicationFactory<WebMarke
   [Fact]
   public async Task ReturnsNotFoundGivenId0()
   {
-    string route = GetProjectByIdRequest.BuildRoute(0);
-    _ = await _client.GetAndEnsureNotFoundAsync(route);
+    var route = GetProjectByIdRequest.BuildRoute(0);
+    var response = await _client.GetAsync(route);
+    Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
   }
 }

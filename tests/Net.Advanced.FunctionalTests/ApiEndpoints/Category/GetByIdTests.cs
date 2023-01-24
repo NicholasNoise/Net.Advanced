@@ -1,4 +1,5 @@
-﻿using Ardalis.HttpClientTestExtensions;
+﻿using System.Net;
+using Ardalis.HttpClientTestExtensions;
 using Net.Advanced.Web;
 using Net.Advanced.Web.Endpoints.CategoryEndpoints;
 using Xunit;
@@ -18,7 +19,7 @@ public class GetByIdTests : BaseWebFixture
   {
     // Arrange.
     const int categoryId = 1;
-    string route = GetCategoryByIdRequest.BuildRoute(categoryId);
+    var route = GetCategoryByIdRequest.BuildRoute(categoryId);
 
     // Act.
     var result = await Client.GetAndDeserializeAsync<CategoryRecord>(route);
@@ -33,9 +34,10 @@ public class GetByIdTests : BaseWebFixture
   {
     // Arrange.
     const int categoryId = 0;
-    string route = GetCategoryByIdRequest.BuildRoute(categoryId);
+    var route = GetCategoryByIdRequest.BuildRoute(categoryId);
 
     // Assert.
-    _ = await Client.GetAndEnsureNotFoundAsync(route);
+    var response = await Client.GetAsync(route);
+    Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
   }
 }
