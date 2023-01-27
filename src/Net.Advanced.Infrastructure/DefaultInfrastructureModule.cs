@@ -65,7 +65,7 @@ public class DefaultInfrastructureModule : Module
       .InstancePerLifetimeScope();
 
     builder
-      .RegisterType<DomainEventDispatcher>()
+      .RegisterType<RabbitEventDispatcher>()
       .As<IDomainEventDispatcher>()
       .InstancePerLifetimeScope();
 
